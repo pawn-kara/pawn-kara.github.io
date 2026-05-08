@@ -676,7 +676,7 @@ ul.fav li span{color:var(--text2);font-style:italic;font-size:13px;}
         </div>
       </div>
       <div class="gb-vdivider"></div>
-      <div class="gb-panel-souls">
+      <div class="gb-panel-travelers">
         <div class="gb-souls-header">· · · travelers that passed · · ·</div>
         <div class="guest-list" id="guest-list">
           <div class="guest-loading" id="guest-loading">summoning ...</div>
@@ -892,7 +892,7 @@ const db  = getFirestore(app);
     if(!listEl)return;
     if(loadEl)loadEl.style.display='none';
     setBadge(docs.length);
-    if(!docs.length){listEl.innerHTML='<div class="guest-empty">no souls have spoken yet —<br>be the first to leave a mark</div>';return;}
+    if(!docs.length){listEl.innerHTML='<div class="guest-empty">no wanderer have spoken yet —<br>be the first to leave a mark</div>';return;}
     var frag=document.createDocumentFragment();
     docs.forEach(function(d,i){
       var data=d.data?d.data():d;
