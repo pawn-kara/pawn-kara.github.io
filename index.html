@@ -332,9 +332,9 @@ ul.fav li span{color:var(--text2);font-style:italic;font-size:13px;}
 .guest-count-badge{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.18);letter-spacing:.12em;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:2px;padding:2px 10px;margin-left:10px;vertical-align:middle;}
 .gb-layout{display:grid;grid-template-columns:1fr 1fr;gap:0;position:relative;min-height:340px;}
 .gb-panel-form{padding-right:20px;}
-.gb-panel-souls{padding-left:20px;display:flex;flex-direction:column;}
+.gb-panel-travelers{padding-left:20px;display:flex;flex-direction:column;}
 .gb-vdivider{position:absolute;left:50%;top:0;bottom:0;width:1px;z-index:2;background:linear-gradient(180deg,transparent,rgba(255,255,255,.05) 20%,rgba(255,255,255,.05) 80%,transparent);}
-.gb-souls-header{font-family:var(--mono);font-size:10px;letter-spacing:.20em;color:rgba(255,255,255,.14);text-transform:uppercase;margin-bottom:12px;text-align:center;}
+.gb-travelers-header{font-family:var(--mono);font-size:10px;letter-spacing:.20em;color:rgba(255,255,255,.14);text-transform:uppercase;margin-bottom:12px;text-align:center;}
 .guest-form{display:flex;flex-direction:column;gap:14px;position:relative;z-index:1;}
 .guest-row-fields{display:grid;grid-template-columns:1fr;gap:10px;}
 .guest-field{display:flex;flex-direction:column;gap:5px;animation:fieldFadeIn .6s cubic-bezier(.22,1,.36,1) both;}
@@ -379,7 +379,7 @@ ul.fav li span{color:var(--text2);font-style:italic;font-size:13px;}
 .entry-msg{font-size:13px;color:rgba(255,255,255,.35);line-height:1.72;word-break:break-word;}
 .guest-empty{font-family:var(--fell);font-style:italic;font-size:14px;color:rgba(255,255,255,.16);text-align:center;padding:24px 0;line-height:1.78;}
 @media(max-width:600px){
-  .gb-layout{grid-template-columns:1fr;gap:0;}.gb-panel-form{padding-right:0;padding-bottom:16px;}.gb-panel-souls{padding-left:0;padding-top:16px;border-top:1px solid var(--border);}.gb-vdivider{display:none;}.guest-row-fields{grid-template-columns:1fr 1fr;}.guest-list{max-height:380px;}
+  .gb-layout{grid-template-columns:1fr;gap:0;}.gb-panel-form{padding-right:0;padding-bottom:16px;}.gb-panel-travelers{padding-left:0;padding-top:16px;border-top:1px solid var(--border);}.gb-vdivider{display:none;}.guest-row-fields{grid-template-columns:1fr 1fr;}.guest-list{max-height:380px;}
   @keyframes entrySlide{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}.guest-entry:hover{transform:none;}
 }
 @media(max-width:400px){.guest-row-fields{grid-template-columns:1fr;}}
@@ -444,7 +444,7 @@ ul.fav li span{color:var(--text2);font-style:italic;font-size:13px;}
   <!-- HEADER -->
   <div id="header" class="reveal">
     <h1 class="site-name">Pawn Page</h1>
-    <p class="header-sub">☩ &nbsp; kara-21 &nbsp;·&nbsp; soul archive &nbsp;·&nbsp; pawn page &nbsp; ☩</p>
+    <p class="header-sub">☩ &nbsp; kara-21 &nbsp;·&nbsp; archive &nbsp;·&nbsp; pawn page &nbsp; ☩</p>
     <p class="header-motto">"be strong."</p>
     <div class="hdr-img-frame" aria-hidden="true"><img class="hdr-accent-img" src="https://i.ibb.co/N2ZLT7vS/005.jpg" alt="" draggable="false" loading="lazy"/></div>
   </div>
@@ -677,7 +677,7 @@ ul.fav li span{color:var(--text2);font-style:italic;font-size:13px;}
       </div>
       <div class="gb-vdivider"></div>
       <div class="gb-panel-travelers">
-        <div class="gb-souls-header">· · · travelers that passed · · ·</div>
+        <div class="gb-travelers-header">· · · travelers that passed · · ·</div>
         <div class="guest-list" id="guest-list">
           <div class="guest-loading" id="guest-loading">summoning ...</div>
         </div>
@@ -717,7 +717,7 @@ const db  = getFirestore(app);
 // ── loader typewriter ──
 (function(){
   var el=document.getElementById("ld-type");if(!el)return;
-  var msgs=["entering the fallen page","loading soul data","oh god forgive me","still here..."];
+  var msgs=["entering the pawn page","loading data"," lets stay ","still here..."];
   var mi=0,ci=0,del=false,wait=0;
   function step(){if(wait>0){wait--;setTimeout(step,80);return;}var m=msgs[mi];if(!del){el.textContent=m.slice(0,++ci);if(ci>=m.length){del=true;wait=22;setTimeout(step,80);}else setTimeout(step,65);}else{el.textContent=m.slice(0,--ci);if(ci<=0){del=false;mi=(mi+1)%msgs.length;wait=8;setTimeout(step,80);}else setTimeout(step,38);}}
   setTimeout(step,600);
@@ -885,7 +885,7 @@ const db  = getFirestore(app);
 
   function san(s,max){return String(s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;').trim().slice(0,max||300);}
   function fmt(ts){var d=ts&&ts.toDate?ts.toDate():new Date(ts);var mo=['jan','feb','mar','apr','may','jun','jul','aug','sep','oct','nov','dec'];return mo[d.getMonth()]+' '+String(d.getDate()).padStart(2,'0')+', '+d.getFullYear();}
-  function setBadge(n){if(badgeEl)badgeEl.textContent=n?n+' souls':'';}
+  function setBadge(n){if(badgeEl)badgeEl.textContent=n?n+' travelers':'';}
   function showFb(msg,cls){if(!fbEl)return;fbEl.textContent=msg;fbEl.className='guest-feedback'+(cls?' '+cls:'');}
 
   function render(docs){
@@ -908,7 +908,7 @@ const db  = getFirestore(app);
   }
 
   const q=query(colRef,orderBy('ts','desc'));
-  onSnapshot(q,function(snap){render(snap.docs);},function(err){console.error(err);if(listEl)listEl.innerHTML='<div class="guest-empty">could not summon souls</div>';});
+  onSnapshot(q,function(snap){render(snap.docs);},function(err){console.error(err);if(listEl)listEl.innerHTML='<div class="guest-empty">could not summon </div>';});
 
   async function submit(){
     if(!nameEl||!msgEl)return;
