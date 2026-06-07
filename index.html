@@ -1,210 +1,196 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#000" />
-  <title>pawn page — minimal</title>
-  <link rel="icon" href="favicon.ico">
-  <style>
-    /* Minimal, mobile-first, system fonts */
-    :root{--bg:#000;--fg:#e9e9e9;--muted:rgba(255,255,255,.32);--accent:#34d399}
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{margin:0;background:var(--bg);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial;line-height:1.5;-webkit-font-smoothing:antialiased;padding:18px}
-    a{color:var(--accent)}
-    header{max-width:820px;margin:0 auto 18px}
-    .title{font-weight:600;font-size:20px;letter-spacing:.06em}
-    .sub{color:var(--muted);font-size:12px;margin-top:6px}
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="dark"/>
+<meta name="referrer" content="strict-origin-when-cross-origin"/>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Pawn Page — kara-21. A personal website by Kara."/>
+<meta name="theme-color" content="#000000"/>
+<title>pawn page ☁︎</title>
 
-    main{max-width:820px;margin:0 auto}
-    .row{display:grid;grid-template-columns:1fr;gap:12px}
-    .card{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);padding:12px;border-radius:6px}
-    .actions{display:flex;gap:8px;flex-wrap:wrap}
-    button, .link-btn{background:transparent;border:1px solid rgba(255,255,255,.06);color:var(--fg);padding:8px 10px;border-radius:4px;cursor:pointer}
-    button.primary{border-color:var(--accent);color:var(--accent)}
-    .muted{color:var(--muted);font-size:13px}
+<!-- Fonts loaded non-blocking: preserve look but don't block first paint -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=VT323&display=swap" onload="this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=VT323&display=swap" rel="stylesheet"></noscript>
 
-    /* Gallery grid (created on demand) */
-    .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-    .gallery-grid img{width:100%;height:100%;object-fit:cover;display:block;border-radius:4px}
-    @media(min-width:700px){.gallery-grid{grid-template-columns:repeat(4,1fr)}}
-    @media(max-width:420px){.gallery-grid{grid-template-columns:repeat(2,1fr)}}
-
-    /* Lightbox */
-    #lb{position:fixed;inset:0;background:rgba(0,0,0,.95);display:flex;align-items:center;justify-content:center;padding:20px;visibility:hidden;opacity:0;transition:opacity .2s,visibility .2s}
-    #lb.open{visibility:visible;opacity:1}
-    #lb img{max-width:96vw;max-height:86vh;object-fit:contain}
-
-    footer{max-width:820px;margin:24px auto;color:var(--muted);font-size:13px;text-align:center}
-
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce){*{transition:none!important}}
-  </style>
+<style>
+/* Critical CSS (keeps visual identity). Heavy animations are disabled by default via .no-fancy */
+:root{--bg:#000;--surface:rgba(255,255,255,.02);--accent:#34d399;--text:rgba(255,255,255,.68);--text2:rgba(255,255,255,.30);--border:rgba(255,255,255,.06);--frak:"Cinzel",serif;--fell:"Cormorant Garamond",Georgia,serif;--mono:"VT323",monospace}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--fell);font-size:15px;line-height:1.78;min-height:100vh;overflow-x:hidden;padding:18px}
+a{color:var(--accent)}
+#page{max-width:720px;margin:0 auto;padding:24px 18px 64px}
+.site-name{font-family:var(--frak);font-size:clamp(42px,10vw,72px);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+.header-sub{font-family:var(--mono);font-size:12px;color:rgba(255,255,255,.15);margin-top:8px}
+.box{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px}
+.box-title{font-family:var(--frak);font-size:18px;color:rgba(255,255,255,.55);margin-bottom:8px}
+.photo-frame img,img{max-width:100%;height:auto}
+.link-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.site-link{display:inline-block;padding:8px 12px;border:1px solid var(--border);border-radius:4px;color:rgba(255,255,255,.35);text-decoration:none}
+.site-link:hover{color:var(--accent)}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+@media(min-width:540px){.gallery-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:860px){.gallery-grid{grid-template-columns:repeat(4,1fr)}}
+/* Minimal lightbox */
+#lightbox{position:fixed;inset:0;z-index:100;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.96);visibility:hidden;opacity:0;transition:opacity .25s,visibility .25s}
+#lightbox.open{visibility:visible;opacity:1}
+.lb-img{max-width:96vw;max-height:86vh;object-fit:contain}
+/* disable heavy visuals when .no-fancy is on body */
+.no-fancy *{animation:none!important;transition:none!important}
+.no-fancy #sparks,.no-fancy .side-img,.no-fancy .hdr-img-frame{display:none!important}
+</style>
 </head>
 <body>
-  <header>
-    <div class="title">pawn page</div>
-    <div class="sub">kara-21 · minimal mode — fancy visuals are opt-in to preserve battery and performance</div>
-  </header>
 
-  <main>
-    <section class="row">
-      <div class="card">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <div>
-            <strong>Welcome</strong>
-            <div class="muted">A lighter, responsive version. Gallery + Peace + Guestbook combined and lazy-loaded.</div>
-          </div>
-          <div class="actions">
-            <button id="btn-fancy" class="link-btn">Enable visuals</button>
-            <button id="btn-gallery" class="primary">Open gallery</button>
-            <button id="btn-peace">Open peace</button>
-            <button id="btn-guest">Open guestbook</button>
-          </div>
-        </div>
-      </div>
+<div id="ambient" aria-hidden="true"></div>
+<canvas id="sparks" aria-hidden="true"></canvas>
+<img class="side-img side-img-left side-top" src="https://i.ibb.co/CKBZVyjL/04.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy"/>
+<img class="side-img side-img-left side-bot" src="https://i.ibb.co/ns7PZWYD/03.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy"/>
+<img class="side-img side-img-right side-top" src="https://i.ibb.co/39KD73SH/02.jpg" alt="" aria-hidden="true" draggable="false" loading="lazy"/>
+<img class="side-img side-img-right side-bot" src="https://i.ibb.co/rKdwg7yQ/01.webp" alt="" aria-hidden="true" draggable="false" loading="lazy"/>
 
-      <div id="section-placeholder" class="card muted">Sections you open will load here. Try "Open gallery" or "Open guestbook".</div>
+<div id="page">
+  <div id="header">
+    <h1 class="site-name">Pawn Page</h1>
+    <p class="header-sub">☩ &nbsp; kara-21 &nbsp;·&nbsp; archive &nbsp;·&nbsp; pawn page &nbsp; ☩</p>
+    <p class="header-motto">"be strong."</p>
+    <div class="hdr-img-frame" aria-hidden="true"><img class="hdr-accent-img" src="https://i.ibb.co/N2ZLT7vS/005.jpg" alt="" draggable="false" loading="lazy"/></div>
+  </div>
 
-    </section>
-  </main>
+  <div class="box" style="margin-top:14px;display:flex;justify-content:space-between;align-items:center;gap:8px">
+    <div>
+      <div style="font-weight:600">Welcome — optimized mode</div>
+      <div style="color:var(--text2);font-size:13px">Visuals are preserved but heavy features are lazy-loaded. Use the toggles to enable them.</div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button id="toggle-visuals" style="padding:8px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text)">Enable visuals</button>
+      <button id="open-gallery" style="padding:8px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text)">Gallery</button>
+      <button id="open-peace" style="padding:8px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text)">Peace</button>
+      <button id="open-guest" style="padding:8px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text)">Guestbook</button>
+    </div>
+  </div>
 
-  <div id="lb" role="dialog" aria-modal="true"><img id="lbImg" alt=""/></div>
+  <div id="content" style="margin-top:14px">
+    <!-- content panels will be injected here on demand -->
+    <div class="box" id="placeholder">Open a section above to load content. This keeps the site fast on low-end devices.</div>
+  </div>
 
-  <footer>© <span id="yr"></span> kara-21 · optimized · low-power friendly</footer>
+  <div style="margin-top:18px" class="box">
+    <div class="box-title">about · <span class="t-shimmer">pawn</span></div>
+    <div class="about-text">
+      <p style="color:rgba(255,255,255,.42);margin-bottom:12px;font-size:15px;line-height:1.6">Welcome to my little corner of the <span class="t-ghost">earth</span>. This is where I keep my thoughts, my poetry, my favorites — <strong>everything that makes me, me.</strong></p>
+    </div>
+    <div class="link-row">
+      <a class="site-link" href="https://allpoetry.com/Kara-21" target="_blank" rel="noopener noreferrer">✒ allpoetry</a>
+      <a class="site-link" id="link-gallery" href="#">⊞ gallery</a>
+      <a class="site-link" id="link-peace" href="#">⊞ peace</a>
+      <a class="site-link" href="https://myanimelist.net/profile/pawn_nick">⊞ Anime&amp;Manga detailed list</a>
+    </div>
+  </div>
+
+  <div id="footer" style="text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid var(--border);color:var(--text2)">© <span id="yr"></span> kara-21 / nick · best viewed in the dark</div>
+</div>
+
+<!-- Lightweight lightbox -->
+<div id="lightbox" onclick="if(event.target===this)closeLB()" role="dialog" aria-modal="true"><img id="lbImg" class="lb-img" alt=""/></div>
 
 <script>
-// Utilities
-document.getElementById('yr').textContent = new Date().getFullYear();
-const isLowEnd = (navigator.deviceMemory && navigator.deviceMemory <= 2) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency<=2);
+// Immediate: small heuristics to detect low-end and reduced-motion
+const isLowEnd = (navigator.deviceMemory && navigator.deviceMemory <= 2) || (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 2);
 const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(isLowEnd || prefersReduced){ document.documentElement.classList.add('no-fancy'); document.body.classList.add('no-fancy'); }
 
-// Basic image list (from gallery). Thumbnails are using same URLs but will be lazy-loaded; images remain external.
-const images = [
-  {src:'https://i.ibb.co/XkDQ1CPV/Whats-App-Image-2026-02-28-at-13-33-31.jpg', name:'Winter I', tag:'Winter'},
-  {src:'https://i.ibb.co/35L2N1J2/Whats-App-Image-2026-02-28-at-13-33-32.jpg', name:'Summer I', tag:'Summer'},
-  {src:'https://i.ibb.co/5bwLLYB/Whats-App-Image-2026-02-28-at-13-33-31-6.jpg', name:'Summer II', tag:'Summer'},
-  {src:'https://i.ibb.co/27SrLMjD/Whats-App-Image-2026-02-28-at-13-33-31-5.jpg', name:'Autumn I', tag:'Autumn'},
-  {src:'https://i.ibb.co/wh7kY48n/Whats-App-Image-2026-02-28-at-13-33-30-3.jpg', name:'Winter II', tag:'Winter'},
-  {src:'https://i.ibb.co/hJcgGr9r/Whats-App-Image-2026-02-28-at-13-33-30-2.jpg', name:'Winter III', tag:'Winter'},
-  {src:'https://i.ibb.co/7FCW18F/Whats-App-Image-2026-02-28-at-13-33-30-4.jpg', name:'Winter IV', tag:'Winter'},
-  {src:'https://i.ibb.co/ZR46dFzY/Whats-App-Image-2026-02-28-at-13-33-30.jpg', name:'Autumn II', tag:'Autumn'},
-  {src:'https://i.ibb.co/vCsmkH9t/Whats-App-Image-2026-02-28-at-13-33-31-3.jpg', name:'Summer III', tag:'Summer'},
-  {src:'https://i.ibb.co/pjHRnyjb/Whats-App-Image-2026-02-28-at-13-33-30-1.jpg', name:'Spring I', tag:'Spring'},
-  {src:'https://i.ibb.co/r2S6zyF7/Whats-App-Image-2026-03-24-at-18-23-13-1.jpg', name:'Spring IV', tag:'Spring'},
-  {src:'https://i.postimg.cc/xcMN9b7b/Whats-App-Image-2026-03-24-at-182313.png', name:'Summer IV', tag:'Summer'}
-];
+// expose simple toggle for visuals
+const toggleVisualsBtn = document.getElementById('toggle-visuals');
+let visualsEnabled = !document.body.classList.contains('no-fancy') && false; // start visually off for performance
+function setVisuals(on){
+  visualsEnabled = !!on;
+  if(visualsEnabled){ document.body.classList.remove('no-fancy'); toggleVisualsBtn.textContent = 'Disable visuals'; startOptionalVisuals(); }
+  else{ document.body.classList.add('no-fancy'); toggleVisualsBtn.textContent = 'Enable visuals'; stopOptionalVisuals(); }
+}
+setVisuals(false);
+toggleVisualsBtn.addEventListener('click', ()=>{ setVisuals(!visualsEnabled); });
 
-// Lightbox
-const lb = document.getElementById('lb'); const lbImg = document.getElementById('lbImg');
-function openLightbox(src,alt){ lbImg.src=''; lb.classList.add('open'); lbImg.alt = alt||''; lbImg.src = src; }
-lb.addEventListener('click', (e)=>{ if(e.target===lb) closeLB();}); function closeLB(){ lb.classList.remove('open'); setTimeout(()=>lbImg.src=''); }
-window.addEventListener('keydown', (e)=>{ if(lb.classList.contains('open') && e.key==='Escape') closeLB(); });
+// placeholders for optional visuals (sparks/cosmos) so they can be started/stopped
+let particlesHandle = null;
+function startOptionalVisuals(){ // start particles only when enabled
+  // start sparks canvas animation (lightweight) if not already
+  if(particlesHandle) return;
+  (function(){ const c=document.getElementById('sparks'); if(!c||!c.getContext) return; const ctx=c.getContext('2d'); let W=0,H=0,parts=[]; function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;} resize(); window.addEventListener('resize',resize,{passive:true}); function rand(a,b){return a+(b-a)*Math.random()} function mk(){return {x:rand(W*.05,W*.95),y:H+rand(10,40),vx:rand(-.25,.25),vy:rand(-.35,-.95),life:1,decay:rand(.003,.007),r:rand(0.6,1.6),hue:rand(140,170),sat:rand(30,55),lum:rand(40,65)} } for(let i=0;i<36;i++){ let p=mk(); p.y=rand(0,H); p.life=rand(.1,1); parts.push(p);} let raf=0,last=0; let paused=false; document.addEventListener('visibilitychange',()=>{ if(document.hidden){ paused=true; if(raf){ cancelAnimationFrame(raf); raf=0; } } else { paused=false; raf=requestAnimationFrame(frame);} }); function frame(ts){ if(paused) return; raf=requestAnimationFrame(frame); if(ts-last>16){ last=ts; ctx.clearRect(0,0,W,H); if(Math.random()<.2 && parts.length<90) parts.push(mk()); for(let i=parts.length-1;i>=0;i--){ let p=parts[i]; p.x+=p.vx; p.y+=p.vy; p.life-=p.decay; if(p.life<=0||p.y<-16){ parts[i]=parts[parts.length-1]; parts.pop(); continue; } let a=p.life*.22; ctx.beginPath(); ctx.arc(p.x,p.y,p.r*p.life,0,Math.PI*2); ctx.fillStyle='hsla('+p.hue+','+p.sat+'%,'+p.lum+'%,'+a+')'; ctx.fill(); } } }
+  raf=requestAnimationFrame(frame); particlesHandle = {stop:function(){ if(raf) cancelAnimationFrame(raf); particlesHandle=null; ctx.clearRect(0,0,W,H);} }; })(); }
+function stopOptionalVisuals(){ if(particlesHandle){ particlesHandle.stop(); particlesHandle=null; } }
 
-// Build gallery (lazy)
-let galleryLoaded=false; function loadGallery(target){ if(galleryLoaded) return; galleryLoaded=true;
-  const container = document.createElement('div'); container.className='card';
-  const grid = document.createElement('div'); grid.className='gallery-grid';
-  images.forEach((it,i)=>{
-    const d = document.createElement('div'); const img = document.createElement('img'); img.loading='lazy'; img.decoding='async'; img.alt=it.name||'image'; img.src=it.src; d.appendChild(img);
-    img.addEventListener('click',()=>openLightbox(it.src,it.name)); grid.appendChild(d);
-  });
-  container.innerHTML = '<strong>Gallery</strong><div class="muted">Click thumbnail to open full image</div>';
-  container.appendChild(grid);
-  target.replaceWith(container); // swap placeholder
+// Lightbox functions
+const lb = document.getElementById('lightbox'); const lbImg = document.getElementById('lbImg');
+function openLB(src,alt){ lbImg.src=''; lb.classList.add('open'); lbImg.alt=alt||''; lbImg.src=src; document.body.style.overflow='hidden'; }
+function closeLB(){ lb.classList.remove('open'); document.body.style.overflow=''; setTimeout(()=>lbImg.src=''); }
+window.addEventListener('keydown',(e)=>{ if(lb.classList.contains('open')){ if(e.key==='Escape') closeLB(); if(e.key==='ArrowRight'){} if(e.key==='ArrowLeft'){} } });
+
+// Lazy-inject content when user opens sections
+const placeholder = document.getElementById('placeholder');
+document.getElementById('open-gallery').addEventListener('click', ()=>{ loadGallery(); });
+document.getElementById('open-peace').addEventListener('click', ()=>{ loadPeace(); });
+document.getElementById('open-guest').addEventListener('click', ()=>{ enableGuestbook(); });
+document.getElementById('link-gallery').addEventListener('click', (e)=>{ e.preventDefault(); loadGallery(); });
+document.getElementById('link-peace').addEventListener('click', (e)=>{ e.preventDefault(); loadPeace(); });
+
+let galleryLoaded=false;
+function loadGallery(){ if(galleryLoaded) return; galleryLoaded=true; const c=document.createElement('div'); c.className='box'; c.innerHTML='<div class="box-title">gallery</div><div class="muted">Click thumbnail to open full image</div>'; const grid=document.createElement('div'); grid.className='gallery-grid'; const imgs=[
+  'https://i.ibb.co/XkDQ1CPV/Whats-App-Image-2026-02-28-at-13-33-31.jpg','https://i.ibb.co/35L2N1J2/Whats-App-Image-2026-02-28-at-13-33-32.jpg','https://i.ibb.co/5bwLLYB/Whats-App-Image-2026-02-28-at-13-33-31-6.jpg','https://i.ibb.co/27SrLMjD/Whats-App-Image-2026-02-28-at-13-33-31-5.jpg','https://i.ibb.co/wh7kY48n/Whats-App-Image-2026-02-28-at-13-33-30-3.jpg','https://i.ibb.co/hJcgGr9r/Whats-App-Image-2026-02-28-at-13-33-30-2.jpg','https://i.ibb.co/7FCW18F/Whats-App-Image-2026-02-28-at-13-33-30-4.jpg','https://i.ibb.co/ZR46dFzY/Whats-App-Image-2026-02-28-at-13-33-30.jpg','https://i.ibb.co/vCsmkH9t/Whats-App-Image-2026-02-28-at-13-33-31-3.jpg','https://i.ibb.co/pjHRnyjb/Whats-App-Image-2026-02-28-at-13-33-30-1.jpg','https://i.ibb.co/r2S6zyF7/Whats-App-Image-2026-03-24-at-18-23-13-1.jpg','https://i.postimg.cc/xcMN9b7b/Whats-App-Image-2026-03-24-at-182313.png'
+]; imgs.forEach(src=>{ const d=document.createElement('div'); const im=document.createElement('img'); im.src=src; im.loading='lazy'; im.decoding='async'; im.alt='gallery'; im.addEventListener('click',()=>openLB(src)); d.appendChild(im); grid.appendChild(d); }); c.appendChild(grid); placeholder.replaceWith(c); }
+
+let peaceLoaded=false;
+function loadPeace(){ if(peaceLoaded) return; peaceLoaded=true; const c=document.createElement('div'); c.className='box'; c.innerHTML = '<div class="box-title">peace</div><div class="muted">A poem. Audio is opt-in to avoid heavy downloads.</div><div style="margin-top:10px"><p style="font-size:18px;margin:6px 0">Once, we loved being good,</p><p style="font-style:italic;margin:6px 0;color:var(--text2)">Only to realize in the end that it was selfish,</p><p style="margin:6px 0">Understanding the meaning, I became real,</p><p style="font-weight:600;margin:6px 0">Not sugar, not salt — just water.</p></div><div style="margin-top:12px"><button id="peace-play" style="padding:8px;border-radius:4px;border:1px solid var(--border);background:transparent;color:var(--text)">Play music</button></div>';
+  placeholder.replaceWith(c);
+  c.querySelector('#peace-play').addEventListener('click',()=>{
+    if(c.querySelector('audio')) return; const audio=document.createElement('audio'); audio.controls=true; audio.autoplay=true; audio.loop=true; audio.style.marginTop='8px'; const src=document.createElement('source'); src.src='Kara no Kyoukai Satsujin Kousatsu (Zen) OST -2.mp3'; src.type='audio/mpeg'; audio.appendChild(src); c.appendChild(audio); audio.volume=0; const t=setInterval(()=>{ if(audio.volume<0.25) audio.volume=Math.min(0.25,audio.volume+0.02); else clearInterval(t); },700);
+  }); }
+
+// ---- Firebase lazy loader + starters for counter & guestbook ----
+let firebaseReady=false; let g_db=null; let firebaseLibs=null;
+async function loadFirebase(){ if(firebaseReady) return; try{
+  const appMod = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js');
+  const fsMod = await import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js');
+  firebaseLibs = { initializeApp: appMod.initializeApp, getFirestore: fsMod.getFirestore, collection: fsMod.collection, addDoc: fsMod.addDoc, query: fsMod.query, orderBy: fsMod.orderBy, onSnapshot: fsMod.onSnapshot, serverTimestamp: fsMod.serverTimestamp, runTransaction: fsMod.runTransaction, doc: fsMod.doc, getDoc: fsMod.getDoc };
+  const firebaseConfig = { apiKey: atob("QUl6YVN5RHU4NmRUNjBzaF94LXBDRWxaUVowQzBBZGlzR19xU0Fr"), authDomain: "fallenpage-fdb3d.firebaseapp.com", projectId: "fallenpage-fdb3d", storageBucket: "fallenpage-fdb3d.firebasestorage.app", messagingSenderId: "97560388444", appId: "1:97560388444:web:71906c3e2f1e2652edd799" };
+  const app = firebaseLibs.initializeApp(firebaseConfig);
+  g_db = firebaseLibs.getFirestore(app);
+  firebaseReady = true;
+  // after firebase loaded, start counter and guestbook listeners
+  try{ startVisitCounter(); startGuestbook(); }catch(e){ console.warn('firebase started but failed to init features',e); }
+ }catch(err){ console.error('could not load firebase',err); }
 }
 
-// Build peace (poem + optional audio load)
-let peaceLoaded=false; function loadPeace(target){ if(peaceLoaded) return; peaceLoaded=true;
-  const c = document.createElement('div'); c.className='card';
-  c.innerHTML = `
-    <strong>Peace</strong>
-    <div class="muted">A short poem. Audio is opt-in to avoid autoplay and heavy downloads.</div>
-    <div style="margin-top:10px"> 
-      <p style="font-size:18px;margin:6px 0">Once, we loved being good,</p>
-      <p style="font-style:italic;margin:6px 0;color:var(--muted)">Only to realize in the end that it was selfish,</p>
-      <p style="margin:6px 0">Understanding the meaning, I became real,</p>
-      <p style="font-weight:600;margin:6px 0">Not sugar, not salt — just water.</p>
-    </div>
-    <div style="margin-top:12px"><button id=play-music class='link-btn'>Play audio (opt-in)</button></div>
-  `;
-  target.replaceWith(c);
-  c.querySelector('#play-music').addEventListener('click', ()=>{
-    // lazy-load audio element
-    if(c.querySelector('audio')) return;
-    const audio = document.createElement('audio'); audio.controls=true; audio.autoplay=true; audio.loop=true; audio.style.marginTop='8px';
-    const src = document.createElement('source'); src.src='Kara no Kyoukai Satsujin Kousatsu (Zen) OST -2.mp3'; src.type='audio/mpeg'; audio.appendChild(src);
-    c.appendChild(audio);
-    // gentle fade-in
-    audio.volume=0; const t = setInterval(()=>{ if(audio.volume<0.25){ audio.volume = Math.min(0.25, audio.volume+0.02);} else clearInterval(t); },700);
-  });
-}
+// Attach enableGuestbook to button: will load firebase + mount guest UI
+function enableGuestbook(){ if(firebaseReady){ /* already running */ return; } placeholder.innerHTML = '<div class="box">Loading guestbook... please wait</div>'; loadFirebase(); }
 
-// Lazy-load firebase for guestbook & counter
-let firebaseLoaded=false; async function loadGuestbook(target){ if(firebaseLoaded) return firebaseLoaded=true && initGuestbook(target);
-  target.innerHTML = '<div class="muted">Loading guestbook…</div>';
-  try{
-    // dynamic import of firebase modules
-    const [{ initializeApp }, { getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, getDoc, runTransaction }] = await Promise.all([
-      import('https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js'),
-      import('https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js')
-    ]);
+// Visit counter (migrated from original, runs after firebase loaded)
+async function startVisitCounter(){ if(!firebaseReady) return; const SEED=1247, SEEN_KEY='fallen_seen_v3'; const counterRef = firebaseLibs.doc(g_db,'site','counter'); const digits=['cnt-d0','cnt-d1','cnt-d2','cnt-d3','cnt-d4','cnt-d5'];
+  function setDisplay(n,animate){ const s=String(n).padStart(6,'0'); /* simplified: place digits in DOM if present */ digits.forEach((id,i)=>{ const el = document.getElementById(id); if(!el) return; el.textContent = s[i]; }); }
+  try{ var isNew=false; try{isNew=!localStorage.getItem(SEEN_KEY);}catch(e){} let current; if(isNew){ await firebaseLibs.runTransaction(g_db, async (tx)=>{ const snap = await tx.get(counterRef); current = snap.exists()?(snap.data().count||SEED)+1:SEED+1; tx.set(counterRef,{count:current}); }); try{localStorage.setItem(SEEN_KEY,'1');}catch(e){} } else { const snap = await firebaseLibs.getDoc(counterRef); current = snap.exists()?(snap.data().count||SEED):SEED; } setDisplay(current,false); }catch(e){ console.error(e); setDisplay(SEED+Math.floor(Math.random()*30),false); } }
 
-    const firebaseConfig = {
-      apiKey: atob('QUl6YVN5RHU4NmRUNjBzaF94LXBDRWxaUVowQzBBZGlzR19xU0Fr'),
-      authDomain: 'fallenpage-fdb3d.firebaseapp.com', projectId:'fallenpage-fdb3d',storageBucket:'fallenpage-fdb3d.firebasestorage.app',messagingSenderId:'97560388444',appId:'1:97560388444:web:71906c3e2f1e2652edd799'
-    };
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    initGuestbook(target, {getFirestore, collection, addDoc, query, orderBy, onSnapshot, serverTimestamp, doc, getDoc, runTransaction}, db);
-  }catch(err){ console.error(err); target.innerHTML='<div class="muted">Unable to load guestbook.</div>'; }
-}
+// Guestbook starter (mounts UI and realtime listener). Simplified, security: sanitize messages.
+function startGuestbook(){ if(!firebaseReady) return; // mount guestbook UI in placeholder
+  const el = document.createElement('div'); el.className='box'; el.innerHTML = '<div class="box-title">guestbook</div><div style="margin-top:8px"><div style="display:flex;gap:8px"><input id="g-name" placeholder="wanderer..." style="flex:1;padding:8px;border-radius:4px;border:1px solid var(--border)"><button id="g-submit" style="padding:8px;border-radius:4px;border:1px solid var(--border)">leave your mark</button></div><textarea id="g-msg" placeholder="say something to kara..." rows=3 style="margin-top:8px;padding:8px;border-radius:4px;border:1px solid var(--border)"></textarea><div id="g-feedback" style="margin-top:8px;color:var(--text2)"></div><div id="g-list" style="margin-top:12px;max-height:240px;overflow:auto"></div></div>';
+  placeholder.replaceWith(el);
+  const nameEl = document.getElementById('g-name'); const msgEl = document.getElementById('g-msg'); const submitEl = document.getElementById('g-submit'); const fb = document.getElementById('g-feedback'); const listEl = document.getElementById('g-list');
+  const colRef = firebaseLibs.collection(g_db,'guestbook'); const q = firebaseLibs.query(colRef, firebaseLibs.orderBy('ts','desc'));
+  firebaseLibs.onSnapshot(q, function(snap){ if(!snap || !snap.docs || !snap.docs.length){ listEl.innerHTML = '<div style="color:var(--text2)">no wanderer have spoken yet — be the first</div>'; return; } listEl.innerHTML = snap.docs.map(d=>{ const data = d.data?d.data():d; const name = (data.name||'wanderer'); const msg = (data.msg||''); return `<div style="padding:8px;border-bottom:1px solid rgba(255,255,255,.03)"><div style="font-weight:600">${escapeHtml(name)}</div><div style="color:var(--text2);margin-top:4px">${escapeHtml(msg)}</div></div>` }).join(''); }, function(err){ console.error(err); listEl.innerHTML = '<div style="color:var(--text2)">could not summon</div>'; });
+  submitEl.addEventListener('click', async ()=>{ const name = (nameEl.value||'wanderer').slice(0,32); const msg = (msgEl.value||'').slice(0,300); if(!msg.trim()){ fb.textContent='write something first...'; return; } submitEl.disabled=true; fb.textContent='saving...'; try{ await firebaseLibs.addDoc(colRef,{name:name,msg:msg,ts:firebaseLibs.serverTimestamp()}); nameEl.value=''; msgEl.value=''; fb.textContent='your soul has spoken'; }catch(e){ console.error(e); fb.textContent='something went wrong'; } setTimeout(()=>{ submitEl.disabled=false; fb.textContent=''; },1200); }); }
 
-function initGuestbook(target, libs, db){
-  // simple UI: show list + form
-  target.innerHTML = `
-    <div><strong>Guestbook</strong><div class='muted'>Messages are stored with Firebase. Loading is lazy to save resources.</div></div>
-    <div style="margin-top:10px;display:flex;gap:8px;flex-direction:column">
-      <input id='g-name' placeholder='name' style='padding:8px;border-radius:4px;border:1px solid rgba(255,255,255,.04)' maxlength=32>
-      <textarea id='g-msg' placeholder='say something...' rows=3 style='padding:8px;border-radius:4px;border:1px solid rgba(255,255,255,.04)'></textarea>
-      <div style='display:flex;gap:8px;align-items:center'><button id='g-send' class='primary'>Send</button><div id='g-feedback' class='muted'></div></div>
-    </div>
-    <div id='g-list' style='margin-top:12px;max-height:260px;overflow:auto;padding-right:6px'></div>
-  `;
-  const listEl = document.getElementById('g-list'); const nameEl=document.getElementById('g-name'); const msgEl=document.getElementById('g-msg'); const fb=document.getElementById('g-feedback');
-  const colRef = libs ? libs.collection(db,'guestbook') : collection(db,'guestbook');
-  const q = libs ? libs.query(colRef, libs.orderBy('ts','desc')) : query(colRef, orderBy('ts','desc'));
-  // realtime updates
-  (libs ? libs.onSnapshot : onSnapshot)(q, snap=>{
-    if(!snap||!snap.docs||!snap.docs.length){ listEl.innerHTML = '<div class="muted">no messages yet</div>'; return; }
-    listEl.innerHTML = snap.docs.map(d=>{ const data = d.data?d.data():d; return `<div style="padding:8px;border-bottom:1px solid rgba(255,255,255,.03)"><div style="font-weight:600">${escapeHtml((data.name||'wanderer'))}</div><div style='font-size:13px;color:var(--muted)'>${escapeHtml(data.msg||'')}</div></div>` }).join('');
-  }, err=>{ console.error(err); listEl.innerHTML='<div class="muted">could not load messages</div>' });
+// small helper
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'})[c]; }); }
 
-  document.getElementById('g-send').addEventListener('click', async ()=>{
-    const name = (nameEl.value||'wanderer').slice(0,32); const msg = (msgEl.value||'').slice(0,300); if(!msg.trim()){ fb.textContent='write something first'; return; }
-    fb.textContent='saving…'; try{ await (libs?libs.addDoc:addDoc)(colRef,{name:name,msg:msg,ts:(libs?libs.serverTimestamp:serverTimestamp)()}); fb.textContent='saved'; nameEl.value=''; msgEl.value=''; setTimeout(()=>fb.textContent='',1600); }catch(e){ console.error(e); fb.textContent='error'; }
-  });
-}
-function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'})[c]); }
-
-// Handlers for buttons
-const placeholder = document.getElementById('section-placeholder');
-document.getElementById('btn-gallery').addEventListener('click', ()=>{ loadGallery(placeholder); });
-document.getElementById('btn-peace').addEventListener('click', ()=>{ loadPeace(placeholder); });
-document.getElementById('btn-guest').addEventListener('click', ()=>{ loadGuestbook(placeholder); });
-
-// Fancy visuals toggle: we simply add a class or load optional scripts — keep it opt-in. For low-end or reduced-motion, hide the option or mark as slow.
-const btnFancy = document.getElementById('btn-fancy'); if(isLowEnd || prefersReduced) btnFancy.textContent = 'Visuals (disabled)';
-btnFancy.addEventListener('click', ()=>{
-  if(isLowEnd || prefersReduced){ alert('Your device or settings prefer reduced motion/low power — visuals remain disabled to keep site snappy.'); return; }
-  // load optional small particle script (very lightweight), or just toggle a decorative CSS class here.
-  if(btnFancy.dataset.on==='1'){ btnFancy.dataset.on='0'; btnFancy.textContent='Enable visuals'; document.body.classList.remove('fancy'); return; }
-  btnFancy.dataset.on='1'; btnFancy.textContent='Disable visuals'; document.body.classList.add('fancy');
-  // optionally load a small remote script only when enabled (omitted here to keep minimal)
-});
-
-// Accessibility: allow keyboard to close lightbox
+// On load: attach year
+document.getElementById('yr').textContent = new Date().getFullYear();
 
 </script>
 </body>
