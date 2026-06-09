@@ -730,7 +730,7 @@ body.peace-mode{overflow:hidden}
 <div id="page">
 
   <div id="header" class="rv">
-    <h1 class="site-name">Nick</h1>
+    <h1 class="site-name"></h1>
     <p class="hd-sub">☩ &nbsp;nick · zen · europe&nbsp; ☩</p>
     <p class="hd-motto">"be present."</p>
     <div class="hdr-frame" aria-hidden="true">
@@ -1011,7 +1011,7 @@ const db = getFirestore(initializeApp({
 (() => {
   const el = document.getElementById('ld-type');
   if (!el) return;
-  const msgs = ['entering the void', 'loading presence', 'water finds its way', 'still here...'];
+  const msgs = ['entering the page', 'loading presence', 'water finds its way', 'still here...'];
   let mi = 0, ci = 0, del = false, w = 0;
   const step = () => {
     if (w > 0) { w--; setTimeout(step, 80); return; }
