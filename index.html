@@ -137,6 +137,19 @@ body.peace-mode{overflow:hidden}
 .nb.on{color:var(--bg);background:var(--acc)}
 .nb:hover:not(.on){color:rgba(var(--ink-rgb),.55);background:var(--srf)}
 
+/* wide viewports: nav moves into the side margin as a quiet vertical rail */
+@media(min-width:1180px){
+  #top-nav{
+    left:auto;right:0;top:0;bottom:0;height:auto;width:88px;
+    flex-direction:column;justify-content:center;gap:22px;
+    background:transparent;border-bottom:none;border-left:1px solid var(--brd2);
+  }
+  .nb{width:76%;text-align:center;padding:9px 0}
+  .nb.on{background:transparent;color:var(--acc)}
+  .nb.on::after{content:'';position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);width:14px;height:1px;background:var(--acc)}
+  .nb:hover:not(.on){background:transparent;color:rgba(var(--ink-rgb),.55)}
+}
+
 /* ═══════════════════════════════════════════
    SCROLL REVEAL
 ═══════════════════════════════════════════ */
@@ -152,6 +165,7 @@ body.peace-mode{overflow:hidden}
   opacity:0;transition:opacity .9s ease .1s;
 }
 #page.show{opacity:1}
+@media(min-width:1180px){#page{padding-top:48px}}
 
 /* ═══════════════════════════════════════════
    HOME — HEADER
@@ -190,7 +204,7 @@ body.peace-mode{overflow:hidden}
 .t-acc{color:var(--acc);display:inline}
 .t-shim{color:rgba(var(--ink-rgb),.86);display:inline}
 .t-dim{color:rgba(var(--ink-rgb),.30);font-style:italic;display:inline}
-.t-red{color:rgba(196,140,120,.55);display:inline}
+.t-red{color:rgba(var(--acc-rgb),.75);display:inline}
 
 /* ═══════════════════════════════════════════
    HOME — MARQUEE
@@ -225,34 +239,50 @@ body.peace-mode{overflow:hidden}
   transition:border-color .3s,background .3s;
 }
 .box:hover{border-color:rgba(var(--ink-rgb),.17);background:rgba(var(--ink-rgb),.036)}
+.box.box-lg{border-radius:13px;padding:25px 27px}
+.box.box-tight{border-radius:6px;padding:14px 16px;border-color:var(--brd2);background:rgba(var(--ink-rgb),.016)}
 .box-t{
   font-family:var(--frak);font-size:16.5px;color:rgba(var(--ink-rgb),.52);font-weight:500;
   border-bottom:1px solid var(--brd2);padding-bottom:9px;margin-bottom:14px;
   letter-spacing:.01em;line-height:1;
   display:flex;align-items:center;gap:8px;
 }
+.box-lg .box-t{font-size:18px;margin-bottom:16px}
+.box-tight .box-t{font-size:14px;padding-bottom:7px;margin-bottom:10px}
 .box-t::before{content:'';width:3px;height:3px;border-radius:50%;background:var(--acc);opacity:.7;flex-shrink:0}
 .sg{margin-top:12px}
 
 /* ═══════════════════════════════════════════
    HOME — GRIDS
+   asymmetric cluster: portrait+mood stack left, photo
+   runs tall on the right, dossier spans the base
 ═══════════════════════════════════════════ */
-.cg{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.cg{
+  display:grid;grid-template-columns:1.05fr 1fr;gap:16px;
+  grid-template-areas:"portrait photo" "mood photo" "dossier dossier";
+}
+.port-box{grid-area:portrait}
+.mood-box{grid-area:mood}
+.ph-box{grid-area:photo}
+.dossier-box{grid-area:dossier}
 .ur{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:520px){.cg,.ur{grid-template-columns:1fr}}
+@media(max-width:640px){
+  .cg{grid-template-columns:1fr;grid-template-areas:"portrait" "mood" "photo" "dossier"}
+  .ur{grid-template-columns:1fr}
+}
 
 /* ═══════════════════════════════════════════
    HOME — PORTRAIT BOX
 ═══════════════════════════════════════════ */
-.port-box{text-align:center;padding:22px 16px 18px}
+.port-box{text-align:center;padding:22px 16px 18px;display:flex;flex-direction:column;justify-content:center}
 .port-art{
-  width:90px;height:90px;margin:0 auto 13px;
-  border:1px solid var(--brd);border-radius:var(--r);
+  width:84px;height:84px;margin:0 auto 13px;
+  border:1px solid var(--brd);border-radius:10px;
   background:var(--bg2);display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
 }
 .port-art img{
-  width:100%;height:100%;object-fit:cover;border-radius:var(--r);
+  width:100%;height:100%;object-fit:cover;border-radius:10px;
   filter:brightness(.85) saturate(.72);transition:filter .5s;
 }
 .port-art:hover img{filter:brightness(.93) saturate(.82)}
@@ -264,11 +294,11 @@ body.peace-mode{overflow:hidden}
    HOME — MOOD BOX
 ═══════════════════════════════════════════ */
 .mood-lay{display:flex;gap:15px;align-items:stretch}
-.mood-imgw{flex:0 0 86px;border-radius:var(--r);overflow:hidden;border:1px solid var(--brd);align-self:center}
+.mood-imgw{flex:0 0 78px;border-radius:8px;overflow:hidden;border:1px solid var(--brd);align-self:center}
 .mood-img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.78) saturate(.68);transition:filter .5s}
 .mood-imgw:hover .mood-img{filter:brightness(.88) saturate(.78)}
 .mood-c{flex:1;min-width:0}
-@media(max-width:520px){.mood-lay{flex-direction:column;align-items:center;text-align:center}.mood-imgw{flex:0 0 auto;width:96px;height:120px}}
+@media(max-width:640px){.mood-lay{flex-direction:column;align-items:center;text-align:center}.mood-imgw{flex:0 0 auto;width:96px;height:120px}}
 .mood-box .box-t{font-size:16px}
 .mood-q{font-family:var(--frak);font-style:italic;font-size:13.5px;color:rgba(var(--ink-rgb),.40);line-height:1.6;margin-bottom:9px}
 .mood-row{line-height:1.85}
@@ -280,23 +310,25 @@ body.peace-mode{overflow:hidden}
 .mood-tag:hover{color:var(--acc)}
 
 /* ═══════════════════════════════════════════
-   HOME — DOSSIER
+   HOME — DOSSIER (spans full width — flows as
+   a calm two-column list rather than one long strip)
 ═══════════════════════════════════════════ */
-.sg-grid{display:flex;flex-direction:column}
+.sg-grid{columns:2;column-gap:32px}
 .sg-grid dt{display:none}
 .sg-grid dd{
+  display:block;break-inside:avoid;
   font-family:var(--fell);font-size:14px;color:rgba(var(--ink-rgb),.48);
-  padding:9px 0;border-bottom:1px solid var(--brd2);line-height:1.4;
+  padding:8px 0;border-bottom:1px solid var(--brd2);line-height:1.4;
 }
-.sg-grid dd:last-child{border-bottom:none;padding-bottom:0}
-.sg-grid dd:first-child{padding-top:0}
+.sg-grid dd:last-child{border-bottom:none}
+@media(max-width:520px){.sg-grid{columns:1}}
 
 /* ═══════════════════════════════════════════
    HOME — PHOTO BOX
 ═══════════════════════════════════════════ */
-.ph-box{padding:16px 16px 14px;text-align:center}
-.ph-frame{position:relative;width:100%;overflow:hidden;border:1px solid var(--brd);border-radius:var(--r);background:var(--bg2)}
-.ph-frame img{display:block;width:100%;height:auto;object-fit:cover;filter:brightness(.78) contrast(1.04) saturate(.58);transition:filter .4s}
+.ph-box{padding:14px 14px 12px;text-align:center;height:100%;display:flex;flex-direction:column}
+.ph-frame{position:relative;width:100%;flex:1;min-height:0;overflow:hidden;border:1px solid var(--brd);border-radius:9px;background:var(--bg2)}
+.ph-frame img{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(.78) contrast(1.04) saturate(.58);transition:filter .4s}
 .ph-frame:hover img{filter:brightness(.87) saturate(.66)}
 .ph-cap{font-family:var(--mono);font-size:9.5px;color:rgba(var(--ink-rgb),.20);letter-spacing:.06em;margin-top:8px}
 
@@ -395,7 +427,7 @@ body.peace-mode{overflow:hidden}
 .g-inp:focus{border-color:var(--ac-b)}
 .g-sel{
   cursor:pointer;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(238,230,214,.3)'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(236,229,217,.3)'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 12px center;padding-right:30px;
 }
 .g-sel option{background:var(--bg2);color:rgba(var(--ink-rgb),.75)}
@@ -481,6 +513,7 @@ body.peace-mode{overflow:hidden}
    GALLERY VIEW
 ═══════════════════════════════════════════ */
 #vgal{padding-top:var(--nh)}
+@media(min-width:1180px){#vgal{padding-top:40px}}
 .gal-hd{text-align:center;padding:32px 18px 20px}
 .gal-hd h1{
   font-family:var(--frak);font-size:clamp(24px,6vw,42px);
@@ -718,7 +751,7 @@ body.peace-mode{overflow:hidden}
   ║  Music plays automatically when entering Peace view  ║
   ╚══════════════════════════════════════════════════════╝
 -->
-<audio id="bgmusic" loop>
+<audio id="bgmusic" loop preload="auto">
   <source src="Kara no Kyoukai Satsujin Kousatsu (Zen) OST -2.mp3" type="audio/mpeg">
 </audio>
 
@@ -768,23 +801,23 @@ body.peace-mode{overflow:hidden}
         </div>
         <div class="mood-c">
           <div class="box-t">current mood</div>
-          <p class="mood-q">"<span class="t-acc">positive</span> super tired 24/7"</p>
+          <p class="mood-q">"<span class="t-acc">positive</span> and at ease, most days"</p>
           <div class="mood-row">
-            <span class="mood-tag">☁ restless</span>
+            <span class="mood-tag">☁ dreamy</span>
             <span class="mood-tag">🕯 alive</span>
-            <span class="mood-tag">☽ falling</span>
-            <span class="mood-tag">☽ tired</span>
+            <span class="mood-tag">☽ floating</span>
+            <span class="mood-tag">☽ mellow</span>
             <span class="mood-tag">☽ positive</span>
             <span class="mood-tag">☽ optimistic</span>
             <span class="mood-tag">☽ feelin like a poet</span>
-            <span class="mood-tag">☽ suffering</span>
+            <span class="mood-tag">☽ grateful</span>
           </div>
         </div>
       </div>
     </div>
 
     <!-- dossier -->
-    <div class="box">
+    <div class="box dossier-box">
       <div class="box-t">dossier</div>
       <dl class="sg-grid">
         <dt></dt><dd><span class="t-shim">INFJ</span></dd>
@@ -812,7 +845,7 @@ body.peace-mode{overflow:hidden}
 
   <!-- clock + counter -->
   <div class="ur sg rv">
-    <div class="box">
+    <div class="box box-tight">
       <div class="clk-w">
         <div class="clk-t">local time</div>
         <div class="clk-d">
@@ -821,7 +854,7 @@ body.peace-mode{overflow:hidden}
         <div class="clk-dt" id="ck-date"></div>
       </div>
     </div>
-    <div class="box">
+    <div class="box box-tight">
       <div class="cnt-w">
         <div class="cnt-t">travelers visited</div>
         <div class="cnt-row">
@@ -840,10 +873,10 @@ body.peace-mode{overflow:hidden}
   <div class="div rv"><span class="div-s">· · ·</span></div>
 
   <!-- about -->
-  <div class="box rv">
+  <div class="box box-lg rv">
     <div class="box-t">about · <span class="t-shim">nick</span></div>
     <div class="ab-t">
-      <p>Let freedom awake in your heart — <em><span class="t-red">let suffering dissolve like morning mist.</span></em> Compassion will hold you. <span class="t-acc">Kindness will guide you.</span> Let your pain fade away.</p>
+      <p>Let freedom awake in your heart — <em><span class="t-red">let heaviness dissolve like morning mist.</span></em> Compassion will hold you. <span class="t-acc">Kindness will guide you.</span> Let your worries fade away.</p>
       <p>Welcome to my little corner of the <span class="t-dim">earth</span>. This is where I keep my thoughts, my poetry, my favorites — <strong>everything that makes me, me.</strong> Stay as long as you like, <span class="t-shim">wandering beings</span>.</p>
     </div>
     <div class="link-row">
@@ -869,13 +902,13 @@ body.peace-mode{overflow:hidden}
             <div class="g-field">
               <label class="g-lbl" for="g-vibe">— vibe</label>
               <select class="g-inp g-sel" id="g-vibe">
-                <option value="☽">☽ fallen</option>
+                <option value="☽">☽ peaceful</option>
                 <option value="🕯">🕯 ember</option>
-                <option value="⛧">⛧ sinful</option>
+                <option value="🌿">🌿 grateful</option>
                 <option value="✦">✦ wandering</option>
-                <option value="☁">☁ restless</option>
-                <option value="♐">♐ cursed</option>
-                <option value="🖤">🖤 dark</option>
+                <option value="☁">☁ dreamy</option>
+                <option value="♐">♐ hopeful</option>
+                <option value="🤍">🤍 gentle</option>
                 <option value="☩">☩ forgiven</option>
               </select>
             </div>
@@ -889,9 +922,9 @@ body.peace-mode{overflow:hidden}
               <button class="g-emo" type="button" data-e="☽">☽</button>
               <button class="g-emo" type="button" data-e="✦">✦</button>
               <button class="g-emo" type="button" data-e="🕯">🕯</button>
-              <button class="g-emo" type="button" data-e="⛧">⛧</button>
+              <button class="g-emo" type="button" data-e="🌿">🌿</button>
               <button class="g-emo" type="button" data-e="♐">♐</button>
-              <button class="g-emo" type="button" data-e="🖤">🖤</button>
+              <button class="g-emo" type="button" data-e="🤍">🤍</button>
               <button class="g-emo" type="button" data-e="☩">☩</button>
               <button class="g-emo" type="button" data-e="☁">☁</button>
               <span class="g-chars" id="g-chars">300</span>
@@ -1094,17 +1127,24 @@ const db = getFirestore(initializeApp({
 
   /* ── Music: auto-play, no button ── */
   let audioBound = false;
+  const fadeToTarget = () => {
+    let v = 0;
+    audio.volume = 0;
+    const fi = setInterval(() => {
+      v += 0.012;
+      if (v >= 0.22) { audio.volume = 0.22; clearInterval(fi); }
+      else audio.volume = v;
+    }, 220);
+  };
   const playMusic = () => {
     if (!audio) return;
     audio.volume = 0;
     audio.play().then(() => {
-      /* fade in volume over ~5 s */
-      let v = 0;
-      const fi = setInterval(() => {
-        v += 0.012;
-        if (v >= 0.22) { audio.volume = 0.22; clearInterval(fi); }
-        else audio.volume = v;
-      }, 220);
+      /* on a first, unbuffered play, play() can resolve before sound is
+         actually audible — wait for the real 'playing' event so the fade
+         never gets a head start on silence still loading in the background */
+      if (audio.readyState >= 3) fadeToTarget();
+      else audio.addEventListener('playing', fadeToTarget, { once: true });
     }).catch(() => {
       /* browser blocked autoplay — start on first tap/click in peace view */
       if (!audioBound) {
