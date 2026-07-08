@@ -79,34 +79,36 @@ body.peace-mode{overflow:hidden}
    LOADER
 ═══════════════════════════════════════════ */
 #loader{
-  position:fixed;inset:0;z-index:9999;background:var(--bg);
+  position:fixed;inset:0;z-index:9999;
+  background:radial-gradient(ellipse 60% 55% at 50% 44%,rgba(var(--acc-rgb),.05) 0%,transparent 70%),var(--bg);
   display:flex;align-items:center;justify-content:center;
   transition:opacity 1.1s ease,visibility 1.1s ease;
 }
 #loader.gone{opacity:0;visibility:hidden;pointer-events:none}
 .ld-inner{
-  display:flex;flex-direction:column;align-items:center;gap:15px;text-align:center;padding:0 20px;
+  display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;padding:0 20px;
   animation:ld-rise 1.2s cubic-bezier(.22,1,.36,1) both;
 }
 @keyframes ld-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.ld-rule{width:30px;height:1px;background:linear-gradient(90deg,transparent,var(--ac-b),transparent)}
+
+.ld-title-row{display:flex;align-items:flex-end;gap:14px}
+.ld-wick{width:3px;height:56px;border-radius:3px;background:rgba(var(--ink-rgb),.09);position:relative;overflow:hidden;flex-shrink:0}
+.ld-wick-fill{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,var(--acc),rgba(var(--acc-rgb),.15));
+  box-shadow:0 0 10px rgba(var(--acc-rgb),.55);
+  transform:scaleY(0);transform-origin:bottom;
+  animation:ldf-wick 1.9s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes ldf-wick{to{transform:scaleY(1)}}
+
 .ld-title{
-  font-family:var(--frak);font-size:clamp(36px,9vw,58px);
-  letter-spacing:.005em;font-weight:500;line-height:1;
+  font-family:var(--frak);font-size:clamp(38px,9vw,60px);
+  letter-spacing:.005em;font-weight:500;line-height:.9;
   color:rgba(var(--ink-rgb),.90);
   animation:ld-glow 3.2s ease-in-out infinite;
 }
 @keyframes ld-glow{0%,100%{text-shadow:0 0 22px rgba(var(--acc-rgb),.12)}50%{text-shadow:0 0 36px rgba(var(--acc-rgb),.24)}}
-
-/* a small rising wick in place of a flat bar — reads like a candle catching light */
-.ld-wick{width:2px;height:44px;border-radius:2px;background:rgba(var(--ink-rgb),.09);position:relative;overflow:hidden}
-.ld-wick-fill{
-  position:absolute;left:0;right:0;bottom:0;height:0;
-  background:linear-gradient(to top,var(--acc),rgba(var(--acc-rgb),.18));
-  box-shadow:0 0 8px rgba(var(--acc-rgb),.5);
-  animation:ldf-wick 1.9s cubic-bezier(.4,0,.2,1) forwards;
-}
-@keyframes ldf-wick{to{height:100%}}
 
 .ld-type{
   font-family:var(--fell);font-size:13.5px;letter-spacing:.01em;
@@ -281,13 +283,14 @@ body.peace-mode{overflow:hidden}
 ═══════════════════════════════════════════ */
 .port-box{text-align:center;padding:22px 16px 18px;display:flex;flex-direction:column;justify-content:center}
 .port-art{
-  width:84px;height:84px;margin:0 auto 13px;
+  width:106px;height:106px;margin:0 auto 13px;
   border:1px solid var(--brd);border-radius:10px;
   background:var(--bg2);display:flex;align-items:center;justify-content:center;
   position:relative;overflow:hidden;
 }
 .port-art img{
   width:100%;height:100%;object-fit:cover;border-radius:10px;
+  transform:scale(1.35);
   filter:brightness(.85) saturate(.72);transition:filter .5s;
 }
 .port-art:hover img{filter:brightness(.93) saturate(.82)}
@@ -333,7 +336,7 @@ body.peace-mode{overflow:hidden}
 ═══════════════════════════════════════════ */
 .ph-box{padding:14px 14px 12px;text-align:center;height:100%;display:flex;flex-direction:column}
 .ph-frame{position:relative;width:100%;flex:1;min-height:0;overflow:hidden;border:1px solid var(--brd);border-radius:9px;background:var(--bg2)}
-.ph-frame img{display:block;width:100%;height:100%;object-fit:cover;filter:brightness(.78) contrast(1.04) saturate(.58);transition:filter .4s}
+.ph-frame img{display:block;width:100%;height:100%;object-fit:cover;transform:scale(1.12);filter:brightness(.78) contrast(1.04) saturate(.58);transition:filter .4s,transform .5s}
 .ph-frame:hover img{filter:brightness(.87) saturate(.66)}
 .ph-cap{font-family:var(--mono);font-size:9.5px;color:rgba(var(--ink-rgb),.20);letter-spacing:.06em;margin-top:8px}
 
@@ -733,9 +736,10 @@ body.peace-mode{overflow:hidden}
 <!-- ═══════ LOADER ═══════ -->
 <div id="loader" role="status" aria-label="Loading">
   <div class="ld-inner">
-    <div class="ld-rule" aria-hidden="true"></div>
-    <div class="ld-title">Nick</div>
-    <div class="ld-wick" aria-hidden="true"><div class="ld-wick-fill"></div></div>
+    <div class="ld-title-row">
+      <div class="ld-wick" aria-hidden="true"><div class="ld-wick-fill"></div></div>
+      <div class="ld-title">Nick</div>
+    </div>
     <div class="ld-type" id="ld-type"></div>
     <div class="ld-sub">buddhist zen · europe</div>
   </div>
@@ -1148,22 +1152,22 @@ const db = getFirestore(initializeApp({
   const fadeOutAndPause = () => {
     if (fadeTimer) clearInterval(fadeTimer);
     fadeTimer = setInterval(() => {
-      const v = audio.volume - 0.024;
-      if (v <= 0.01) { audio.volume = 0; audio.pause(); clearInterval(fadeTimer); fadeTimer = null; }
+      const v = audio.volume - 0.010;
+      if (v <= 0.008) { audio.volume = 0; audio.pause(); clearInterval(fadeTimer); fadeTimer = null; }
       else audio.volume = v;
-    }, 90);
+    }, 110);
   };
   const playMusic = () => {
     if (!audio) return;
     if (!audio.paused) { fadeIn(); return; } /* already playing — just steer the fade back up, no new play() */
     audio.volume = 0;
-    audio.play().then(() => {
-      /* on a first, unbuffered play, play() can resolve before sound is
-         actually audible — wait for the real 'playing' event so the fade
-         never gets a head start on silence still loading in the background */
-      if (audio.readyState >= 3) fadeIn();
-      else audio.addEventListener('playing', fadeIn, { once: true });
-    }).catch(() => {
+    /* attach before play(), not inside its .then() — on a cold first load the
+       browser can start truly playing before that promise callback even runs,
+       and a listener added after the fact can miss the moment entirely, which
+       is exactly what produced the "cuts in with no fade" first-visit bug */
+    audio.addEventListener('playing', fadeIn, { once: true });
+    audio.play().catch(() => {
+      audio.removeEventListener('playing', fadeIn);
       /* browser blocked autoplay — start on first tap/click in peace view */
       if (!audioBound) {
         audioBound = true;
