@@ -85,32 +85,37 @@ body.peace-mode{overflow:hidden}
 }
 #loader.gone{opacity:0;visibility:hidden;pointer-events:none}
 .ld-inner{
-  display:flex;flex-direction:column;align-items:center;gap:17px;text-align:center;padding:0 20px;
+  display:flex;flex-direction:column;align-items:center;gap:15px;text-align:center;padding:0 20px;
   animation:ld-rise 1.2s cubic-bezier(.22,1,.36,1) both;
 }
-@keyframes ld-rise{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@keyframes ld-rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 .ld-rule{width:30px;height:1px;background:linear-gradient(90deg,transparent,var(--ac-b),transparent)}
 .ld-title{
-  font-family:var(--frak);font-size:clamp(34px,9vw,54px);
-  letter-spacing:.01em;font-weight:500;
-  color:rgba(var(--ink-rgb),.88);
+  font-family:var(--frak);font-size:clamp(36px,9vw,58px);
+  letter-spacing:.005em;font-weight:500;line-height:1;
+  color:rgba(var(--ink-rgb),.90);
   animation:ld-glow 3.2s ease-in-out infinite;
 }
 @keyframes ld-glow{0%,100%{text-shadow:0 0 22px rgba(var(--acc-rgb),.12)}50%{text-shadow:0 0 36px rgba(var(--acc-rgb),.24)}}
+
+/* a small rising wick in place of a flat bar — reads like a candle catching light */
+.ld-wick{width:2px;height:44px;border-radius:2px;background:rgba(var(--ink-rgb),.09);position:relative;overflow:hidden}
+.ld-wick-fill{
+  position:absolute;left:0;right:0;bottom:0;height:0;
+  background:linear-gradient(to top,var(--acc),rgba(var(--acc-rgb),.18));
+  box-shadow:0 0 8px rgba(var(--acc-rgb),.5);
+  animation:ldf-wick 1.9s cubic-bezier(.4,0,.2,1) forwards;
+}
+@keyframes ldf-wick{to{height:100%}}
+
 .ld-type{
-  font-family:var(--fell);font-size:13.5px;letter-spacing:.02em;
-  color:rgba(var(--ink-rgb),.30);height:20px;font-style:normal;
+  font-family:var(--fell);font-size:13.5px;letter-spacing:.01em;
+  color:rgba(var(--ink-rgb),.32);height:20px;font-style:normal;
 }
 .ld-type::after{content:'|';animation:cur .6s step-start infinite;margin-left:2px;color:var(--acc)}
 @keyframes cur{0%,100%{opacity:1}50%{opacity:0}}
-.ld-bar{width:min(130px,42vw);height:2px;border-radius:2px;background:rgba(var(--ink-rgb),.08);overflow:hidden;position:relative}
-.ld-fill{
-  position:absolute;inset:0;transform:scaleX(0);transform-origin:left;
-  background:var(--acc);box-shadow:0 0 8px rgba(var(--acc-rgb),.45);
-  will-change:transform;animation:ldf 1.9s cubic-bezier(.4,0,.2,1) forwards;
-}
-@keyframes ldf{to{transform:scaleX(1)}}
-.ld-sub{font-family:var(--mono);font-size:9.5px;color:rgba(var(--ink-rgb),.20);letter-spacing:.10em}
+.ld-sub{font-family:var(--mono);font-size:9.5px;color:rgba(var(--ink-rgb),.20);letter-spacing:.10em;margin-top:1px}
+
 
 /* ═══════════════════════════════════════════
    VIEW SYSTEM
@@ -639,13 +644,13 @@ body.peace-mode{overflow:hidden}
 @keyframes pwake{0%{opacity:0;transform:translateY(11px)}38%{opacity:0}100%{opacity:1;transform:none}}
 
 .p-sutra{
-  font-family:var(--jp);font-weight:200;font-size:clamp(7.5px,1.5vw,10.5px);
+  font-family:var(--jp);font-weight:400;font-size:clamp(7.5px,1.5vw,10.5px);
   color:rgba(185,152,82,.20);letter-spacing:.62em;
   margin-bottom:clamp(30px,8vw,54px);
   opacity:0;animation:psh 2s ease 1.2s forwards;
 }
 .p-ghost{
-  position:absolute;font-family:var(--jp);font-weight:200;
+  position:absolute;font-family:var(--jp);font-weight:400;
   font-size:clamp(110px,28vw,190px);color:rgba(185,152,82,.038);
   user-select:none;pointer-events:none;top:50%;left:50%;
   transform:translate(-50%,-46%);z-index:0;
@@ -682,11 +687,11 @@ body.peace-mode{overflow:hidden}
 }
 .p-kanji{margin-top:clamp(11px,2.4vw,18px);display:flex;gap:clamp(13px,3.4vw,26px);opacity:0;animation:psh 1.8s ease 5.3s forwards}
 .pk{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:default}
-.pkc{font-family:var(--jp);font-weight:200;font-size:clamp(16px,3.8vw,24px);color:rgba(185,152,82,.15);transition:color 1s,text-shadow 1s}
+.pkc{font-family:var(--jp);font-weight:400;font-size:clamp(16px,3.8vw,24px);color:rgba(185,152,82,.15);transition:color 1s,text-shadow 1s}
 .pk:hover .pkc{color:rgba(195,150,62,.42);text-shadow:0 0 20px rgba(195,150,62,.10)}
-.pkm{font-family:var(--jp);font-weight:200;font-size:clamp(6px,1.2vw,8px);color:rgba(180,148,78,.10);letter-spacing:.22em;text-align:center}
+.pkm{font-family:var(--mono);font-weight:400;font-size:clamp(6px,1.2vw,8px);color:rgba(180,148,78,.10);letter-spacing:.22em;text-align:center}
 .p-off{
-  margin-top:clamp(22px,4.5vw,38px);font-family:var(--jp);font-weight:200;
+  margin-top:clamp(22px,4.5vw,38px);font-family:var(--mono);font-weight:400;
   font-size:clamp(7px,1.4vw,9px);color:rgba(175,144,74,.11);letter-spacing:.5em;
   opacity:0;animation:psh 1.4s ease 5.9s forwards;
 }
@@ -730,8 +735,8 @@ body.peace-mode{overflow:hidden}
   <div class="ld-inner">
     <div class="ld-rule" aria-hidden="true"></div>
     <div class="ld-title">Nick</div>
+    <div class="ld-wick" aria-hidden="true"><div class="ld-wick-fill"></div></div>
     <div class="ld-type" id="ld-type"></div>
-    <div class="ld-bar"><div class="ld-fill"></div></div>
     <div class="ld-sub">buddhist zen · europe</div>
   </div>
 </div>
@@ -1127,24 +1132,37 @@ const db = getFirestore(initializeApp({
 
   /* ── Music: auto-play, no button ── */
   let audioBound = false;
-  const fadeToTarget = () => {
-    let v = 0;
-    audio.volume = 0;
-    const fi = setInterval(() => {
-      v += 0.012;
-      if (v >= 0.22) { audio.volume = 0.22; clearInterval(fi); }
+  let fadeTimer = null;
+  /* single shared fade — always clears whatever fade was previously in
+     flight before starting its own, so rapid tab-switching can't stack
+     multiple competing intervals on top of each other (that stacking was
+     the actual cause of the stutter/lag on fast switching) */
+  const fadeIn = () => {
+    if (fadeTimer) clearInterval(fadeTimer);
+    fadeTimer = setInterval(() => {
+      const v = audio.volume + 0.012;
+      if (v >= 0.22) { audio.volume = 0.22; clearInterval(fadeTimer); fadeTimer = null; }
       else audio.volume = v;
     }, 220);
   };
+  const fadeOutAndPause = () => {
+    if (fadeTimer) clearInterval(fadeTimer);
+    fadeTimer = setInterval(() => {
+      const v = audio.volume - 0.024;
+      if (v <= 0.01) { audio.volume = 0; audio.pause(); clearInterval(fadeTimer); fadeTimer = null; }
+      else audio.volume = v;
+    }, 90);
+  };
   const playMusic = () => {
     if (!audio) return;
+    if (!audio.paused) { fadeIn(); return; } /* already playing — just steer the fade back up, no new play() */
     audio.volume = 0;
     audio.play().then(() => {
       /* on a first, unbuffered play, play() can resolve before sound is
          actually audible — wait for the real 'playing' event so the fade
          never gets a head start on silence still loading in the background */
-      if (audio.readyState >= 3) fadeToTarget();
-      else audio.addEventListener('playing', fadeToTarget, { once: true });
+      if (audio.readyState >= 3) fadeIn();
+      else audio.addEventListener('playing', fadeIn, { once: true });
     }).catch(() => {
       /* browser blocked autoplay — start on first tap/click in peace view */
       if (!audioBound) {
@@ -1158,13 +1176,8 @@ const db = getFirestore(initializeApp({
   };
 
   const stopMusic = () => {
-    if (!audio || audio.paused) return;
-    let v = audio.volume;
-    const fo = setInterval(() => {
-      v -= 0.024;
-      if (v <= 0.01) { audio.pause(); audio.volume = 0; clearInterval(fo); }
-      else audio.volume = v;
-    }, 90);
+    if (!audio || audio.paused) { if (fadeTimer) { clearInterval(fadeTimer); fadeTimer = null; } return; }
+    fadeOutAndPause();
   };
 
   document.getElementById('top-nav').addEventListener('click', ev => {
