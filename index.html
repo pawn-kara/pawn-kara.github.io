@@ -5,7 +5,7 @@
 <meta name="color-scheme" content="dark">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="nick · zen · personal page · europe">
-<meta name="theme-color" content="#090807">
+<meta name="theme-color" content="#060507">
 <meta property="og:title" content="nick · zen">
 <meta property="og:description" content="Buddhist Zen · Europe · wandering in the space between silence and sound">
 <meta property="og:type" content="website">
@@ -27,28 +27,47 @@
 ═══════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#090807;
-  --bg2:#141210;
-  --ink-rgb:236,229,217;
-  --acc-rgb:196,146,78;
-  --srf:rgba(var(--ink-rgb),.030);
-  --srf-h:rgba(var(--ink-rgb),.052);
-  --brd:rgba(var(--ink-rgb),.11);
-  --brd2:rgba(var(--ink-rgb),.055);
-  --txt:rgba(var(--ink-rgb),.68);
-  --txt2:rgba(var(--ink-rgb),.36);
-  --acc:#c4924e;
-  --ac-d:rgba(var(--acc-rgb),.14);
-  --ac-b:rgba(var(--acc-rgb),.30);
+  /* Dark, deep night base (Inter Miami's away/night kit vibe) */
+  --bg:#060507;
+  --bg2:#110e14;
+  
+  /* Ink/text colors: Crisp white with a very subtle, cool pink-violet tint */
+  --ink-rgb:242,238,245;
+  
+  /* Accent colors: The iconic Inter Miami "Vibrant Pink" (#ff5c97) */
+  --acc-rgb:255,92,151;
+  --acc:#ff5c97;
+  
+  /* Secondary Accent: Argentina "Sky Blue" (#74C0FC) for that subtle duality */
+  --sky-blue-rgb:116,192,252;
+  --sky-blue:#74c0fc;
+  
+  /* Surfacing & Borders (using the cool tinted ink) */
+  --srf:rgba(var(--ink-rgb),.035);
+  --srf-h:rgba(var(--ink-rgb),.06);
+  --brd:rgba(var(--ink-rgb),.12);
+  --brd2:rgba(var(--ink-rgb),.06);
+  --txt:rgba(var(--ink-rgb),.75);
+  --txt2:rgba(var(--ink-rgb),.45);
+  
+  /* Accent highlights & glow effects */
+  --ac-d:rgba(var(--acc-rgb),.15);
+  --ac-b:rgba(var(--acc-rgb),.32);
+  
+  /* Border Radii */
   --r:8px;
   --r-sm:5px;
   --r-pill:999px;
+  
+  /* Typography */
   --frak:'Lora',Georgia,serif;
   --fell:'Inter',system-ui,-apple-system,sans-serif;
   --jp:'Shippori Mincho',serif;
   --mono:'IBM Plex Mono','Courier New',monospace;
   --nh:54px;
-  --shadow:0 8px 24px rgba(0,0,0,.40),0 2px 6px rgba(0,0,0,.30);
+  
+  /* Deeper shadow for that neon-on-dark contrast */
+  --shadow:0 8px 32px rgba(0,0,0,.60),0 2px 8px rgba(0,0,0,.40);
 }
 html{scroll-behavior:smooth}
 body{
