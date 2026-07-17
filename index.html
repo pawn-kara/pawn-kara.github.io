@@ -266,15 +266,14 @@ body.peace-mode{overflow:hidden}
 ═══════════════════════════════════════════ */
 .cg{
   display:grid;grid-template-columns:1.05fr 1fr;gap:16px;
-  grid-template-areas:"portrait photo" "mood photo" "dossier dossier";
+  grid-template-areas:"portrait photo" "mood photo";
 }
 .port-box{grid-area:portrait}
 .mood-box{grid-area:mood}
 .ph-box{grid-area:photo}
-.dossier-box{grid-area:dossier}
 .ur{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:640px){
-  .cg{grid-template-columns:1fr;grid-template-areas:"portrait" "mood" "photo" "dossier"}
+  .cg{grid-template-columns:1fr;grid-template-areas:"portrait" "mood" "photo" }
   .ur{grid-template-columns:1fr}
 }
 
@@ -761,7 +760,7 @@ body.peace-mode{overflow:hidden}
   ╚══════════════════════════════════════════════════════╝
 -->
 <audio id="bgmusic" loop preload="auto">
-  <source src="Kara no Kyoukai Satsujin Kousatsu (Zen) OST -2.mp3" type="audio/mpeg">
+  <source src="Beat De Cumbia Santafesina Instrumental con acordeón(De Gran Talento) VENDIDO!.mp3" type="audio/mpeg">
 </audio>
 
 
@@ -823,23 +822,6 @@ body.peace-mode{overflow:hidden}
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- dossier -->
-    <div class="box dossier-box">
-      <div class="box-t">dossier</div>
-      <dl class="sg-grid">
-        <dt></dt><dd><span class="t-shim">INFJ</span></dd>
-        <dt></dt><dd>5w6</dd>
-        <dt></dt><dd>Sagittarius </dd>
-        <dt></dt><dd>Buddhist </dd>
-        <dt></dt><dd>male </dd>
-        <dt></dt><dd>ambivert</dd>
-        <dt></dt><dd> mmm forests</dd>
-        <dt></dt><dd>running &amp; friends</dd>
-        <dt></dt><dd><span class="t-dim">earth.</span></dd>
-        <dt></dt><dd><span class="t-acc">"still here."</span></dd>
-      </dl>
     </div>
 
     <!-- photo -->
@@ -1008,23 +990,20 @@ body.peace-mode{overflow:hidden}
   <div class="p-wash"></div>
   <!-- ember particles injected by JS when peace view is first opened -->
   <main class="p-page" id="p-content">
-    <span class="p-sutra">般 若 心 經 &nbsp;·&nbsp; heart sutra</span>
-    <div class="p-ghost" aria-hidden="true">水</div>
+    <span class="p-sutra"> &nbsp;·&nbsp; </span>
+    <div class="p-ghost" aria-hidden="true"></div>
     <div class="p-poem">
-      <p class="p-ln p-l1">Once, we loved being good,</p>
-      <p class="p-ln p-l2">Only to realize in the end that it was selfish,</p>
-      <p class="p-ln p-l3">Understanding the meaning, I became real,</p>
-      <p class="p-ln p-l4">Not sugar, not salt — just water.</p>
+      <p class="p-ln p-l1">broski just smile!</p>
     </div>
     <div class="p-spc" aria-hidden="true"></div>
     <div class="p-kanji">
-      <div class="pk"><span class="pkc">無</span><span class="pkm">emptiness</span></div>
-      <div class="pk"><span class="pkc">我</span><span class="pkm">no-self</span></div>
-      <div class="pk"><span class="pkc">水</span><span class="pkm">water</span></div>
-      <div class="pk"><span class="pkc">道</span><span class="pkm">the way</span></div>
-      <div class="pk"><span class="pkc">空</span><span class="pkm">void</span></div>
+      <div class="pk"><span class="pkc"></span><span class="pkm"></span></div>
+      <div class="pk"><span class="pkc"></span><span class="pkm"></span></div>
+      <div class="pk"><span class="pkc"></span><span class="pkm"></span></div>
+      <div class="pk"><span class="pkc"></span><span class="pkm"></span></div>
+      <div class="pk"><span class="pkc"></span><span class="pkm"></span></div>
     </div>
-    <span class="p-off">mu · ga · sui · dō · kū</span>
+    <span class="p-off"></span>
   </main>
 </div><!-- #vpea -->
 
@@ -1197,7 +1176,7 @@ const db = getFirestore(initializeApp({
       /* lazy-load the background image only on first entry */
       if (!bgLoaded) {
         document.getElementById('p-bg').style.backgroundImage =
-          "url('https://i.ibb.co/qFF6TM5Q/e5df4eb1c52940d37fe39245bdceebb9.jpg')";
+          "url('https://i.ibb.co/k6SpGyyD/peace.jpg')";
         bgLoaded = true;
       }
       playMusic();
