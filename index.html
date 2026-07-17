@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="color-scheme" content="dark">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="nick · zen · personal page · europe">
-<meta name="theme-color" content="#060507">
-<meta property="og:title" content="nick · zen">
-<meta property="og:description" content="Buddhist Zen · Europe · wandering in the space between silence and sound">
+<meta name="description" content="nick · chill · personal page · europe">
+<meta name="theme-color" content="#070911">
+<meta property="og:title" content="nick">
+<meta property="og:description" content="just a chill guy · europe">
 <meta property="og:type" content="website">
 <title> · </title>
 
@@ -18,8 +18,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Lora (headers) + Inter (body) + IBM Plex Mono (labels) -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap">
-<!-- Shippori Mincho (kanji subset, separated to prevent clipping) -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;600&text=%E8%88%AC%E8%8B%A5%E5%BF%83%E7%B6%93%E7%84%A1%E6%88%91%E6%B0%B4%E9%81%93%E7%A9%BA&display=swap">
 
 <style>
 /* ═══════════════════════════════════════════
@@ -27,47 +25,27 @@
 ═══════════════════════════════════════════ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  /* Dark, deep night base (Inter Miami's away/night kit vibe) */
-  --bg:#060507;
-  --bg2:#110e14;
-  
-  /* Ink/text colors: Crisp white with a very subtle, cool pink-violet tint */
-  --ink-rgb:242,238,245;
-  
-  /* Accent colors: The iconic Inter Miami "Vibrant Pink" (#ff5c97) */
-  --acc-rgb:255,92,151;
-  --acc:#ff5c97;
-  
-  /* Secondary Accent: Argentina "Sky Blue" (#74C0FC) for that subtle duality */
-  --sky-blue-rgb:116,192,252;
-  --sky-blue:#74c0fc;
-  
-  /* Surfacing & Borders (using the cool tinted ink) */
-  --srf:rgba(var(--ink-rgb),.035);
-  --srf-h:rgba(var(--ink-rgb),.06);
-  --brd:rgba(var(--ink-rgb),.12);
-  --brd2:rgba(var(--ink-rgb),.06);
-  --txt:rgba(var(--ink-rgb),.75);
-  --txt2:rgba(var(--ink-rgb),.45);
-  
-  /* Accent highlights & glow effects */
-  --ac-d:rgba(var(--acc-rgb),.15);
-  --ac-b:rgba(var(--acc-rgb),.32);
-  
-  /* Border Radii */
+  --bg:#070911;
+  --bg2:#111726;
+  --ink-rgb:225,231,245;
+  --acc-rgb:130,157,230;
+  --srf:rgba(var(--ink-rgb),.030);
+  --srf-h:rgba(var(--ink-rgb),.052);
+  --brd:rgba(var(--ink-rgb),.11);
+  --brd2:rgba(var(--ink-rgb),.055);
+  --txt:rgba(var(--ink-rgb),.68);
+  --txt2:rgba(var(--ink-rgb),.36);
+  --acc:#829de6;
+  --ac-d:rgba(var(--acc-rgb),.14);
+  --ac-b:rgba(var(--acc-rgb),.30);
   --r:8px;
   --r-sm:5px;
   --r-pill:999px;
-  
-  /* Typography */
   --frak:'Lora',Georgia,serif;
   --fell:'Inter',system-ui,-apple-system,sans-serif;
-  --jp:'Shippori Mincho',serif;
   --mono:'IBM Plex Mono','Courier New',monospace;
   --nh:54px;
-  
-  /* Deeper shadow for that neon-on-dark contrast */
-  --shadow:0 8px 32px rgba(0,0,0,.60),0 2px 8px rgba(0,0,0,.40);
+  --shadow:0 8px 24px rgba(0,0,0,.40),0 2px 6px rgba(0,0,0,.30);
 }
 html{scroll-behavior:smooth}
 body{
@@ -280,8 +258,8 @@ body.peace-mode{overflow:hidden}
 
 /* ═══════════════════════════════════════════
    HOME — GRIDS
-   asymmetric cluster: portrait+mood stack left, photo
-   runs tall on the right, dossier spans the base
+   asymmetric cluster: portrait+mood stack left,
+   photo runs tall on the right
 ═══════════════════════════════════════════ */
 .cg{
   display:grid;grid-template-columns:1.05fr 1fr;gap:16px;
@@ -292,7 +270,7 @@ body.peace-mode{overflow:hidden}
 .ph-box{grid-area:photo}
 .ur{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 @media(max-width:640px){
-  .cg{grid-template-columns:1fr;grid-template-areas:"portrait" "mood" "photo" }
+  .cg{grid-template-columns:1fr;grid-template-areas:"portrait" "mood" "photo"}
   .ur{grid-template-columns:1fr}
 }
 
@@ -334,20 +312,6 @@ body.peace-mode{overflow:hidden}
 }
 .mood-tag:not(:last-child)::after{content:'·';margin:0 8px;color:rgba(var(--ink-rgb),.16)}
 .mood-tag:hover{color:var(--acc)}
-
-/* ═══════════════════════════════════════════
-   HOME — DOSSIER (spans full width — flows as
-   a calm two-column list rather than one long strip)
-═══════════════════════════════════════════ */
-.sg-grid{columns:2;column-gap:32px}
-.sg-grid dt{display:none}
-.sg-grid dd{
-  display:block;break-inside:avoid;
-  font-family:var(--fell);font-size:14px;color:rgba(var(--ink-rgb),.48);
-  padding:8px 0;border-bottom:1px solid var(--brd2);line-height:1.4;
-}
-.sg-grid dd:last-child{border-bottom:none}
-@media(max-width:520px){.sg-grid{columns:1}}
 
 /* ═══════════════════════════════════════════
    HOME — PHOTO BOX
@@ -453,7 +417,7 @@ body.peace-mode{overflow:hidden}
 .g-inp:focus{border-color:var(--ac-b)}
 .g-sel{
   cursor:pointer;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(236,229,217,.3)'/%3E%3C/svg%3E");
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(225,231,245,.3)'/%3E%3C/svg%3E");
   background-repeat:no-repeat;background-position:right 12px center;padding-right:30px;
 }
 .g-sel option{background:var(--bg2);color:rgba(var(--ink-rgb),.75)}
@@ -631,7 +595,7 @@ body.peace-mode{overflow:hidden}
 .p-bg{
   position:absolute;inset:0;z-index:0;
   background-size:cover;background-position:center 22%;
-  filter:brightness(.16) saturate(.25) sepia(.92) contrast(1.12);
+  filter:brightness(.24) saturate(.55) contrast(1.06);
   transform:scale(1.06);animation:pbr 28s ease-in-out infinite;
 }
 @keyframes pbr{0%,100%{transform:scale(1.06) translateY(0)}50%{transform:scale(1.09) translateY(-5px)}}
@@ -639,16 +603,16 @@ body.peace-mode{overflow:hidden}
 .p-wash{
   position:absolute;inset:0;z-index:1;
   background:
-    radial-gradient(ellipse 110% 52% at 50% 0%,#040302 0%,transparent 80%),
-    radial-gradient(ellipse 110% 55% at 50% 100%,#020101 0%,transparent 74%),
-    radial-gradient(ellipse 55% 110% at 0% 50%,#040302 0%,transparent 68%),
-    radial-gradient(ellipse 55% 110% at 100% 50%,#040302 0%,transparent 68%);
+    radial-gradient(ellipse 110% 52% at 50% 0%,#05060d 0%,transparent 80%),
+    radial-gradient(ellipse 110% 55% at 50% 100%,#030409 0%,transparent 74%),
+    radial-gradient(ellipse 55% 110% at 0% 50%,#05060d 0%,transparent 68%),
+    radial-gradient(ellipse 55% 110% at 100% 50%,#05060d 0%,transparent 68%);
 }
 
 /* embers: tiny CSS-only particles */
 .ember{
   position:absolute;border-radius:50%;pointer-events:none;z-index:2;
-  background:rgba(195,150,71,.11);animation:edr linear infinite;
+  background:rgba(var(--acc-rgb),.14);animation:edr linear infinite;
 }
 @keyframes edr{
   0%{opacity:0;transform:translateY(108vh) translateX(0)}
@@ -664,19 +628,6 @@ body.peace-mode{overflow:hidden}
 }
 @keyframes pwake{0%{opacity:0;transform:translateY(11px)}38%{opacity:0}100%{opacity:1;transform:none}}
 
-.p-sutra{
-  font-family:var(--jp);font-weight:400;font-size:clamp(7.5px,1.5vw,10.5px);
-  color:rgba(185,152,82,.20);letter-spacing:.62em;
-  margin-bottom:clamp(30px,8vw,54px);
-  opacity:0;animation:psh 2s ease 1.2s forwards;
-}
-.p-ghost{
-  position:absolute;font-family:var(--jp);font-weight:400;
-  font-size:clamp(110px,28vw,190px);color:rgba(185,152,82,.038);
-  user-select:none;pointer-events:none;top:50%;left:50%;
-  transform:translate(-50%,-46%);z-index:0;
-  opacity:0;animation:psh 3.5s ease 1.8s forwards;
-}
 .p-poem{
   position:relative;z-index:2;display:flex;flex-direction:column;
   align-items:flex-start;gap:clamp(13px,3.8vw,24px);
@@ -689,31 +640,26 @@ body.peace-mode{overflow:hidden}
 .p-ln:nth-child(4){animation-delay:4.2s}
 @keyframes prise{from{opacity:0;transform:translateX(-6px) translateY(2px)}to{opacity:1;transform:none}}
 
-.p-l1{font-family:var(--frak);font-weight:400;font-size:clamp(17px,4.5vw,26px);color:rgba(228,214,188,.70);letter-spacing:.01em;line-height:1.55}
-.p-l2{font-family:var(--frak);font-weight:400;font-style:italic;font-size:clamp(14px,3.6vw,20px);color:rgba(198,184,154,.47);letter-spacing:.01em;line-height:1.70;padding-left:clamp(10px,2vw,18px)}
-.p-l3{font-family:var(--frak);font-weight:500;font-size:clamp(17px,4.5vw,26px);color:rgba(220,206,175,.65);letter-spacing:.01em;line-height:1.55}
+.p-l1{font-family:var(--frak);font-weight:400;font-size:clamp(17px,4.5vw,26px);color:rgba(var(--ink-rgb),.78);letter-spacing:.01em;line-height:1.55}
+.p-l2{font-family:var(--frak);font-weight:400;font-style:italic;font-size:clamp(14px,3.6vw,20px);color:rgba(var(--ink-rgb),.50);letter-spacing:.01em;line-height:1.70;padding-left:clamp(10px,2vw,18px)}
+.p-l3{font-family:var(--frak);font-weight:500;font-size:clamp(17px,4.5vw,26px);color:rgba(var(--ink-rgb),.70);letter-spacing:.01em;line-height:1.55}
 .p-l4{
   font-family:var(--frak);font-weight:500;font-style:italic;
-  font-size:clamp(22px,5.6vw,36px);color:rgba(195,150,62,.82);
+  font-size:clamp(22px,5.6vw,36px);color:rgba(var(--acc-rgb),.88);
   letter-spacing:.01em;line-height:1.4;position:relative;
   padding-left:clamp(2px,.7vw,7px);margin-top:clamp(3px,.8vw,7px);
 }
-.p-l4::after{content:'';position:absolute;left:0;bottom:-9px;width:clamp(33px,7vw,54px);height:1px;background:rgba(195,150,62,.25)}
+.p-l4::after{content:'';position:absolute;left:0;bottom:-9px;width:clamp(33px,7vw,54px);height:1px;background:rgba(var(--acc-rgb),.3)}
 
 .p-spc{
   margin-top:clamp(32px,7vw,50px);width:1px;
   height:clamp(22px,4vw,34px);
-  background:linear-gradient(to bottom,rgba(185,152,82,.19),transparent);
+  background:linear-gradient(to bottom,rgba(var(--acc-rgb),.24),transparent);
   opacity:0;animation:psh 1.2s ease 5s forwards;
 }
-.p-kanji{margin-top:clamp(11px,2.4vw,18px);display:flex;gap:clamp(13px,3.4vw,26px);opacity:0;animation:psh 1.8s ease 5.3s forwards}
-.pk{display:flex;flex-direction:column;align-items:center;gap:4px;cursor:default}
-.pkc{font-family:var(--jp);font-weight:400;font-size:clamp(16px,3.8vw,24px);color:rgba(185,152,82,.15);transition:color 1s,text-shadow 1s}
-.pk:hover .pkc{color:rgba(195,150,62,.42);text-shadow:0 0 20px rgba(195,150,62,.10)}
-.pkm{font-family:var(--mono);font-weight:400;font-size:clamp(6px,1.2vw,8px);color:rgba(180,148,78,.10);letter-spacing:.22em;text-align:center}
 .p-off{
   margin-top:clamp(22px,4.5vw,38px);font-family:var(--mono);font-weight:400;
-  font-size:clamp(7px,1.4vw,9px);color:rgba(175,144,74,.11);letter-spacing:.5em;
+  font-size:clamp(9px,1.6vw,11px);color:rgba(var(--acc-rgb),.30);letter-spacing:.14em;
   opacity:0;animation:psh 1.4s ease 5.9s forwards;
 }
 @keyframes psh{from{opacity:0}to{opacity:1}}
@@ -721,7 +667,7 @@ body.peace-mode{overflow:hidden}
 /* click ripple on peace view */
 .p-rip{
   position:fixed;border-radius:50%;pointer-events:none;z-index:999;
-  border:1px solid rgba(195,150,62,.15);
+  border:1px solid rgba(var(--acc-rgb),.18);
   animation:prip 1.2s ease-out forwards;
 }
 @keyframes prip{
@@ -759,22 +705,21 @@ body.peace-mode{overflow:hidden}
       <div class="ld-title">Nick</div>
     </div>
     <div class="ld-type" id="ld-type"></div>
-    <div class="ld-sub">buddhist zen · europe</div>
+    <div class="ld-sub">just chill · europe</div>
   </div>
 </div>
 
 <!-- ═══════ NAV ═══════ -->
 <nav id="top-nav" aria-label="Site navigation">
-  <button class="nb on" data-v="home">☩ home</button>
+  <button class="nb on" data-v="home">⌂ home</button>
   <button class="nb"    data-v="gal" >⊞ gallery</button>
   <button class="nb"    data-v="pea" >∿ peace</button>
 </nav>
 
 <!--
   ╔══════════════════════════════════════════════════════╗
-  ║  AUDIO — replace src with your GitHub raw URL        ║
-  ║  https://raw.githubusercontent.com/YOUR_USER/        ║
-  ║  YOUR_REPO/main/Kara%20no%20Kyoukai%20...mp3         ║
+  ║  AUDIO — put the mp3 file alongside this HTML file,  ║
+  ║  or replace src with a hosted URL.                   ║
   ║  Music plays automatically when entering Peace view  ║
   ╚══════════════════════════════════════════════════════╝
 -->
@@ -790,9 +735,9 @@ body.peace-mode{overflow:hidden}
 <div id="page">
 
   <div id="header" class="rv">
-    <h1 class="site-name"></h1>
-    <p class="hd-sub">☩ &nbsp;nick · zen · europe&nbsp; ☩</p>
-    <p class="hd-motto">"be present."</p>
+    <h1 class="site-name">nick</h1>
+    <p class="hd-sub">nick · chill · europe</p>
+    <p class="hd-motto">"just vibing."</p>
     <div class="hdr-frame" aria-hidden="true">
       <img class="hdr-img" src="https://i.ibb.co/N2ZLT7vS/005.jpg" alt="" draggable="false" loading="lazy">
     </div>
@@ -800,8 +745,8 @@ body.peace-mode{overflow:hidden}
 
   <div class="mq-box rv" aria-hidden="true">
     <div class="mq-inner">
-      <span>Oh, hello there!. I promise I will be good. <em>✦</em> still here <em>✦</em> Sometimes I just want to have fun. <em>✦</em> do you enjoy your food? <em>✦</em> PIZZA · shh · NEPTUNE <em>✦</em> buddhist zen <em>✦</em> running <em>✦</em> water <em>✦</em> 無我 <em>✦</em> </span>
-      <span>Oh, i love you. I promise I will be good. <em>✦</em> still here <em>✦</em> earth <em>✦</em> Sometimes I just want to have fun. <em>✦</em> i'm not that good, hehe <em>✦</em> kara no kyoukai <em>✦</em> chess <em>✦</em> kiwi <em>✦</em> 空 <em>✦</em> </span>
+      <span>Oh, hello there!. I promise I will be good. <em>✦</em> still here <em>✦</em> Sometimes I just want to have fun. <em>✦</em> do you enjoy your food? <em>✦</em> PIZZA · shh · NEPTUNE <em>✦</em> just chillin <em>✦</em> running <em>✦</em> water <em>✦</em> good vibes <em>✦</em> </span>
+      <span>Oh, i love you. I promise I will be good. <em>✦</em> still here <em>✦</em> earth <em>✦</em> Sometimes I just want to have fun. <em>✦</em> i'm not that good, hehe <em>✦</em> kara no kyoukai <em>✦</em> chess <em>✦</em> kiwi <em>✦</em> smile <em>✦</em> </span>
     </div>
   </div>
 
@@ -817,7 +762,7 @@ body.peace-mode{overflow:hidden}
       </div>
       <div class="handle">Kara · Nick</div>
       <div class="handle-sub">age 19 · europe</div>
-      <div class="handle-tag">zen · chill · wanderer</div>
+      <div class="handle-tag">chill · wanderer</div>
     </div>
 
     <!-- mood -->
@@ -828,16 +773,13 @@ body.peace-mode{overflow:hidden}
         </div>
         <div class="mood-c">
           <div class="box-t">current mood</div>
-          <p class="mood-q">"<span class="t-acc">positive</span> and at ease, most days"</p>
+          <p class="mood-q">"<span class="t-acc">chill</span> and easygoing, most days"</p>
           <div class="mood-row">
-            <span class="mood-tag">☁ dreamy</span>
-            <span class="mood-tag">🕯 alive</span>
-            <span class="mood-tag">☽ floating</span>
-            <span class="mood-tag">☽ mellow</span>
-            <span class="mood-tag">☽ positive</span>
-            <span class="mood-tag">☽ optimistic</span>
-            <span class="mood-tag">☽ feelin like a poet</span>
-            <span class="mood-tag">☽ grateful</span>
+            <span class="mood-tag">☀ chill</span>
+            <span class="mood-tag">🎧 vibin</span>
+            <span class="mood-tag">😌 easygoing</span>
+            <span class="mood-tag">🌊 relaxed</span>
+            <span class="mood-tag">🙂 good mood</span>
           </div>
         </div>
       </div>
@@ -848,7 +790,7 @@ body.peace-mode{overflow:hidden}
       <div class="ph-frame">
         <img src="https://i.ibb.co/jZZ2P37t/2097777db37d366557cbe12aea8b19c2-1.jpg" alt="" loading="lazy" draggable="false">
       </div>
-      <div class="ph-cap">— art of life —</div>
+      <div class="ph-cap">— just vibes —</div>
     </div>
 
   </div><!-- .cg -->
@@ -886,8 +828,8 @@ body.peace-mode{overflow:hidden}
   <div class="box box-lg rv">
     <div class="box-t">about · <span class="t-shim">nick</span></div>
     <div class="ab-t">
-      <p>Let freedom awake in your heart — <em><span class="t-red">let heaviness dissolve like morning mist.</span></em> Compassion will hold you. <span class="t-acc">Kindness will guide you.</span> Let your worries fade away.</p>
-      <p>Welcome to my little corner of the <span class="t-dim">earth</span>. This is where I keep my thoughts, my poetry, my favorites — <strong>everything that makes me, me.</strong> Stay as long as you like, <span class="t-shim">wandering beings</span>.</p>
+      <p>Hey, <span class="t-acc">welcome</span> — glad you made it here. Nothing too deep, just a chill little page where I post pics, favorites, and whatever's on my mind.</p>
+      <p>Look around, sign the guestbook, say hi. <span class="t-shim">Hope you have a good one.</span></p>
     </div>
     <div class="link-row">
       <a class="sl" href="https://allpoetry.com/Kara-21"              target="_blank" rel="noopener noreferrer">✒ allpoetry</a>
@@ -912,14 +854,14 @@ body.peace-mode{overflow:hidden}
             <div class="g-field">
               <label class="g-lbl" for="g-vibe">— vibe</label>
               <select class="g-inp g-sel" id="g-vibe">
-                <option value="☽">☽ peaceful</option>
-                <option value="🕯">🕯 ember</option>
-                <option value="🌿">🌿 grateful</option>
-                <option value="✦">✦ wandering</option>
-                <option value="☁">☁ dreamy</option>
-                <option value="♐">♐ hopeful</option>
-                <option value="🤍">🤍 gentle</option>
-                <option value="☩">☩ forgiven</option>
+                <option value="😎">😎 chill</option>
+                <option value="🎉">🎉 hyped</option>
+                <option value="🌊">🌊 relaxed</option>
+                <option value="😄">😄 happy</option>
+                <option value="☕">☕ cozy</option>
+                <option value="🤙">🤙 vibing</option>
+                <option value="🤍">🤍 friendly</option>
+                <option value="😴">😴 sleepy</option>
               </select>
             </div>
           </div>
@@ -929,14 +871,14 @@ body.peace-mode{overflow:hidden}
           </div>
           <div class="g-bot">
             <div class="g-emo-row">
-              <button class="g-emo" type="button" data-e="☽">☽</button>
-              <button class="g-emo" type="button" data-e="✦">✦</button>
-              <button class="g-emo" type="button" data-e="🕯">🕯</button>
-              <button class="g-emo" type="button" data-e="🌿">🌿</button>
-              <button class="g-emo" type="button" data-e="♐">♐</button>
+              <button class="g-emo" type="button" data-e="😎">😎</button>
+              <button class="g-emo" type="button" data-e="🎉">🎉</button>
+              <button class="g-emo" type="button" data-e="🌊">🌊</button>
+              <button class="g-emo" type="button" data-e="😄">😄</button>
+              <button class="g-emo" type="button" data-e="☕">☕</button>
+              <button class="g-emo" type="button" data-e="🤙">🤙</button>
               <button class="g-emo" type="button" data-e="🤍">🤍</button>
-              <button class="g-emo" type="button" data-e="☩">☩</button>
-              <button class="g-emo" type="button" data-e="☁">☁</button>
+              <button class="g-emo" type="button" data-e="😴">😴</button>
               <span class="g-chars" id="g-chars">300</span>
             </div>
             <button class="g-sub" id="g-sub" type="button">
@@ -1009,20 +951,14 @@ body.peace-mode{overflow:hidden}
   <div class="p-wash"></div>
   <!-- ember particles injected by JS when peace view is first opened -->
   <main class="p-page" id="p-content">
-    <span class="p-sutra"> &nbsp;·&nbsp; </span>
-    <div class="p-ghost" aria-hidden="true"></div>
     <div class="p-poem">
-      <p class="p-ln p-l1">broski just smile!</p>
+      <p class="p-ln p-l1">Hey — if you're reading this,</p>
+      <p class="p-ln p-l2">yeah, I mean you, scrolling this far</p>
+      <p class="p-ln p-l3">that already makes you pretty cool,</p>
+      <p class="p-ln p-l4">so broski, just smile.</p>
     </div>
     <div class="p-spc" aria-hidden="true"></div>
-    <div class="p-kanji">
-      <div class="pk"><span class="pkc"></span><span class="pkm"></span></div>
-      <div class="pk"><span class="pkc"></span><span class="pkm"></span></div>
-      <div class="pk"><span class="pkc"></span><span class="pkm"></span></div>
-      <div class="pk"><span class="pkc"></span><span class="pkm"></span></div>
-      <div class="pk"><span class="pkc"></span><span class="pkm"></span></div>
-    </div>
-    <span class="p-off"></span>
+    <span class="p-off">just · chill · vibes</span>
   </main>
 </div><!-- #vpea -->
 
@@ -1051,7 +987,7 @@ const db = getFirestore(initializeApp({
 (() => {
   const el = document.getElementById('ld-type');
   if (!el) return;
-  const msgs = ['entering the page', 'loading presence', 'water finds its way', 'still here...'];
+  const msgs = ['loading the vibe', 'grabbing some snacks', 'just a sec...', 'almost there'];
   let mi = 0, ci = 0, del = false, w = 0;
   const step = () => {
     if (w > 0) { w--; setTimeout(step, 80); return; }
@@ -1071,7 +1007,7 @@ const db = getFirestore(initializeApp({
 
 /* ── Loader — dismiss (instant on same session, 2.2 s first visit) ── */
 (() => {
-  const K = 'nick_zen_v2';
+  const K = 'nick_site_v3';
   const ld = document.getElementById('loader');
   const pg = document.getElementById('page');
   const done = () => {
@@ -1262,7 +1198,6 @@ const db = getFirestore(initializeApp({
     });
   };
 
-  /* No "soul" — Buddhist: use "traveler" */
   const showNew = n => {
     const el = document.getElementById('cnt-new');
     if (!el) return;
@@ -1397,7 +1332,7 @@ const db = getFirestore(initializeApp({
     if (elapsed < CD) { fb('please wait ' + Math.ceil((CD - elapsed) / 1000) + 's...', 'err'); return; }
     const name = san(nEl.value || 'wanderer', 32) || 'wanderer';
     const msg  = san(mEl.value, 300);
-    const vibe = vEl?.value || '☽';
+    const vibe = vEl?.value || '😎';
     if (!msg) { fb('write something first...', 'err'); return; }
     sEl.disabled = true;
     sEl.querySelector('.g-sub-txt').textContent = 'saving...';
@@ -1405,9 +1340,9 @@ const db = getFirestore(initializeApp({
     try {
       const ref = await addDoc(col, { name, msg, vibe, ts: serverTimestamp() });
       lastId = ref.id; lastT = Date.now();
-      nEl.value = ''; mEl.value = ''; if (vEl) vEl.value = '☽';
+      nEl.value = ''; mEl.value = ''; if (vEl) vEl.value = '😎';
       uc();
-      fb('your mark is left', 'ok');           /* no "soul" — Buddhist */
+      fb('your mark is left', 'ok');
     } catch(err) {
       console.error(err); fb('something went wrong — try again', 'err');
     }
