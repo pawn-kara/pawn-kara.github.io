@@ -66,11 +66,9 @@ body.peace-mode{overflow:hidden}
     var(--bg);
 }
 
-/* ─── scrollbar ─── */
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:rgba(var(--ink-rgb),.10);border-radius:8px}
-*{scrollbar-width:thin;scrollbar-color:rgba(var(--ink-rgb),.09) transparent}
+/* ─── scrollbar (hidden — everything still scrolls normally) ─── */
+::-webkit-scrollbar{display:none;width:0;height:0}
+*{scrollbar-width:none;-ms-overflow-style:none}
 
 /* ═══════════════════════════════════════════
    LOADER
@@ -136,8 +134,10 @@ body.peace-mode{overflow:hidden}
   font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
   color:rgba(var(--ink-rgb),.30);background:transparent;border:none;border-radius:var(--r-sm);
   padding:7px 16px;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:6px;
   transition:color .2s,background .2s;position:relative;
 }
+.nb-ic{width:14px;height:14px;flex-shrink:0}
 .nb.on{color:var(--bg);background:var(--acc)}
 .nb:hover:not(.on){color:rgba(var(--ink-rgb),.55);background:var(--srf)}
 
@@ -149,6 +149,8 @@ body.peace-mode{overflow:hidden}
     background:transparent;border-bottom:none;border-left:1px solid var(--brd2);
   }
   .nb{width:76%;text-align:center;padding:9px 0}
+  .nb-tx{display:none}
+  .nb-ic{width:17px;height:17px}
   .nb.on{background:transparent;color:var(--acc)}
   .nb.on::after{content:'';position:absolute;left:50%;bottom:-11px;transform:translateX(-50%);width:14px;height:1px;background:var(--acc)}
   .nb:hover:not(.on){background:transparent;color:rgba(var(--ink-rgb),.55)}
@@ -174,6 +176,9 @@ body.peace-mode{overflow:hidden}
   cursor:pointer;box-shadow:var(--shadow);transition:border-color .2s,background .2s;
 }
 #ew-toggle svg{width:19px;height:19px}
+#ew-toggle .ew-ic-x{display:none}
+#ew-toggle[aria-expanded="true"] .ew-ic-link{display:none}
+#ew-toggle[aria-expanded="true"] .ew-ic-x{display:block}
 #ew-toggle:hover{border-color:var(--ac-b);background:var(--srf-h)}
 #ew-panel{
   position:absolute;right:0;bottom:56px;
@@ -489,6 +494,7 @@ body.peace-mode{overflow:hidden}
   font-family:var(--mono);font-size:10.5px;letter-spacing:.03em;
   cursor:pointer;transition:background .25s,opacity .25s;opacity:.65;
 }
+.g-sub-ic{width:13px;height:13px;flex-shrink:0}
 .g-sub:hover{background:var(--ac-d);opacity:1}
 .g-sub:active{transform:scale(.96)}
 .g-sub:disabled{opacity:.13;cursor:default;pointer-events:none}
@@ -504,10 +510,7 @@ body.peace-mode{overflow:hidden}
 .g-list{
   display:flex;flex-direction:column;gap:9px;flex:1;
   max-height:390px;overflow-y:auto;padding-right:3px;
-  scrollbar-width:thin;scrollbar-color:rgba(var(--ink-rgb),.05) transparent;
 }
-.g-list::-webkit-scrollbar{width:2px}
-.g-list::-webkit-scrollbar-thumb{background:rgba(var(--ink-rgb),.07);border-radius:2px}
 
 .g-entry{
   padding:10px 12px;border:1px solid var(--brd2);
@@ -760,14 +763,14 @@ body.peace-mode{overflow:hidden}
 
 <!-- ═══════ NAV ═══════ -->
 <nav id="top-nav" aria-label="Site navigation">
-  <button class="nb on" data-v="home">⌂ home</button>
-  <button class="nb"    data-v="gal" >⊞ gallery</button>
-  <button class="nb"    data-v="pea" >∿ peace</button>
+  <button class="nb on" data-v="home" aria-label="Home" title="Home"><svg class="nb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg><span class="nb-tx">home</span></button>
+  <button class="nb" data-v="gal" aria-label="Gallery" title="Gallery"><svg class="nb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg><span class="nb-tx">gallery</span></button>
+  <button class="nb" data-v="pea" aria-label="Peace" title="Peace"><svg class="nb-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 16c5 0 7-8 12-8a4 4 0 0 1 0 8c-5 0-7-8-12-8a4 4 0 1 0 0 8"/></svg><span class="nb-tx">peace</span></button>
 </nav>
 
 <!-- ═══════ ELSEWHERE — links dock (all views) ═══════ -->
 <nav id="ew-dock" aria-label="Elsewhere — links">
-  <button id="ew-toggle" type="button" aria-expanded="false" aria-controls="ew-panel" title="elsewhere"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></button>
+  <button id="ew-toggle" type="button" aria-expanded="false" aria-controls="ew-panel" title="elsewhere"><svg class="ew-ic-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg><svg class="ew-ic-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg></button>
   <div id="ew-panel">
     <a class="ew-i" href="https://allpoetry.com/Kara-21" target="_blank" rel="noopener noreferrer" title="AllPoetry"><span class="ew-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z"/><path d="M16 8 2 22"/><path d="M17.5 15H9"/></svg></span><span class="ew-tx">poetry</span></a>
     <a class="ew-i" href="https://myanimelist.net/profile/pawn_nick" target="_blank" rel="noopener noreferrer" title="MyAnimeList"><span class="ew-ic"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M14.921 6.479c-.82 0-3.683 0-4.947 3.156-.662 1.652-.986 4.812.876 7.886l1.934-1.41s-.767-1.095-1.083-3.191h2.897l.022 3.19h2.604V8.835h-2.581v2.043l-2.46-.023s.413-2.408 2.877-2.336h2.454l-.572-2.04ZM0 6.528v9.624h2.348v-5.84l2.031 2.664 2.047-2.652v5.828h2.336V6.528H6.437L4.368 9.474 2.31 6.528Zm18.447.022v9.583h5.022L24 14.09h-3.232V6.55Z"/></svg></span><span class="ew-tx">anime</span></a>
@@ -943,7 +946,7 @@ body.peace-mode{overflow:hidden}
               <span class="g-chars" id="g-chars">300</span>
             </div>
             <button class="g-sub" id="g-sub" type="button">
-              <span>✒</span><span class="g-sub-txt">leave your mark</span>
+              <svg class="g-sub-ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 16v-2.38C4 11.5 2.97 10.5 3 8c.03-2.72 1.49-6 4.5-6C9.37 2 10 3.8 10 5.5c0 3.11-2 5.66-2 8.68V16a2 2 0 1 1-4 0Z"/><path d="M20 20v-2.38c0-2.12 1.03-3.12 1-5.62-.03-2.72-1.49-6-4.5-6C14.63 6 14 7.8 14 9.5c0 3.11 2 5.66 2 8.68V20a2 2 0 1 0 4 0Z"/><path d="M16 17h4"/><path d="M4 13h4"/></svg><span class="g-sub-txt">leave your mark</span>
             </button>
           </div>
           <div class="g-fb" id="g-fb" aria-live="polite"></div>
@@ -1222,12 +1225,10 @@ const db = getFirestore(initializeApp({
   const close = () => {
     pnl.classList.remove('open');
     tgl.setAttribute('aria-expanded', 'false');
-    tgl.textContent = '🔗';
   };
   const toggle = () => {
     const open = pnl.classList.toggle('open');
     tgl.setAttribute('aria-expanded', open ? 'true' : 'false');
-    tgl.textContent = open ? '✕' : '🔗';
   };
   tgl.addEventListener('click', e => { e.stopPropagation(); toggle(); });
   pnl.addEventListener('click', e => { if (e.target.closest('.ew-i')) close(); });
@@ -1559,8 +1560,7 @@ const db = getFirestore(initializeApp({
 /* ── Minimal lockdown: right-click + image drag only ──────── */
 (() => {
   document.body.classList.add('lock');
-  const isForm = e => e.target?.closest?.('#g-form');
-  document.addEventListener('contextmenu', e => { if (!isForm(e)) e.preventDefault(); }, true);
+  document.addEventListener('contextmenu', e => e.preventDefault(), true);
   document.addEventListener('mousedown',   e => { if (e.target.tagName === 'IMG') e.preventDefault(); }, true);
 })();
 </script>
