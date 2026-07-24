@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<head>
+<meta charset="UTF-8">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
-<link rel="manifest" href="favicon_io/site.webmanifest"> 
-   
-<head>
-<meta charset="UTF-8">
+<link rel="manifest" href="favicon_io/site.webmanifest">
 <meta name="color-scheme" content="dark">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="nick · chill · personal page · europe">
@@ -15,7 +13,10 @@
 <meta property="og:title" content="nick">
 <meta property="og:description" content="just a chill guy · europe">
 <meta property="og:type" content="website">
-<title> · </title>
+<meta property="og:image" content="https://i.ibb.co/1Jr8P32F/headerr.jpg">
+<meta property="og:url" content="https://pawn7.cc">
+<meta name="twitter:card" content="summary_large_image">
+<title>nick · chill</title>
 
 
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
@@ -74,9 +75,9 @@ body.peace-mode{overflow:hidden}
 #ambient{
   position:fixed;inset:0;z-index:-10;pointer-events:none;
   background:
-    radial-gradient(ellipse 65% 50% at 12% 14%,rgba(var(--acc-rgb),.026) 0%,transparent 60%),
-    radial-gradient(ellipse 55% 50% at 90% 86%,rgba(var(--cool-rgb),.10) 0%,transparent 60%),
-    radial-gradient(ellipse 50% 45% at 88% 18%,rgba(var(--gold-rgb),.014) 0%,transparent 55%),
+    radial-gradient(ellipse 75% 60% at 6% 8%,rgba(var(--acc-rgb),.022) 0%,transparent 68%),
+    radial-gradient(ellipse 90% 80% at 100% 100%,rgba(var(--cool-rgb),.045) 0%,transparent 72%),
+    radial-gradient(ellipse 60% 55% at 94% 10%,rgba(var(--gold-rgb),.015) 0%,transparent 66%),
     var(--bg);
 }
 
@@ -821,14 +822,14 @@ body.peace-mode{overflow:hidden}
     <p class="hd-sub">mmmm</p>
     <p class="hd-motto">"just vibing."</p>
     <div class="hdr-frame" aria-hidden="true">
-      <img class="hdr-img" src="https://i.ibb.co/jk1CR7Kq/headerrrr.jpg" alt="" draggable="false" loading="lazy">
+      <img class="hdr-img" src="https://i.ibb.co/1Jr8P32F/headerr.jpg" alt="" draggable="false" loading="lazy">
     </div>
   </div>
 
   <div class="mq-box rv" aria-hidden="true">
     <div class="mq-inner">
-      <span>Oh, hello there!. I promise I will be good. <em>✦</em> still here <em>✦</em> Sometimes I just want to have fun. <em>✦</em> do you enjoy your food? <em>✦</em> PIZZA · shh · NEPTUNE <em>✦</em> just chillin <em>✦</em> running <em>✦</em> water <em>✦</em> good vibes <em>✦</em> </span>
-      <span>Oh, i love you. I promise I will be good. <em>✦</em> still here <em>✦</em> earth <em>✦</em> Sometimes I just want to have fun. <em>✦</em> i'm not that good, hehe <em>✦</em> kara no kyoukai <em>✦</em> chess <em>✦</em> kiwi <em>✦</em> smile <em>✦</em> </span>
+      <span>Oh, hello there! I promise I will be good. <em>✦</em> still here <em>✦</em> earth <em>✦</em> Sometimes I just want to have fun. <em>✦</em> do you enjoy your food? <em>✦</em> PIZZA · shh · NEPTUNE <em>✦</em> just chillin <em>✦</em> running <em>✦</em> water <em>✦</em> good vibes <em>✦</em> Oh, i love you <em>✦</em> i'm not that good, hehe <em>✦</em> kara no kyoukai <em>✦</em> chess <em>✦</em> kiwi <em>✦</em> smile <em>✦</em> </span>
+      <span>Oh, hello there! I promise I will be good. <em>✦</em> still here <em>✦</em> earth <em>✦</em> Sometimes I just want to have fun. <em>✦</em> do you enjoy your food? <em>✦</em> PIZZA · shh · NEPTUNE <em>✦</em> just chillin <em>✦</em> running <em>✦</em> water <em>✦</em> good vibes <em>✦</em> Oh, i love you <em>✦</em> i'm not that good, hehe <em>✦</em> kara no kyoukai <em>✦</em> chess <em>✦</em> kiwi <em>✦</em> smile <em>✦</em> </span>
     </div>
   </div>
 
@@ -1048,7 +1049,7 @@ body.peace-mode{overflow:hidden}
 import { initializeApp }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getFirestore, doc, getDoc, collection, addDoc,
-         query, orderBy, onSnapshot, serverTimestamp, runTransaction }
+         query, orderBy, limit, onSnapshot, serverTimestamp, runTransaction }
   from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 /* ── Firebase ─────────────────────────────────────────────── */
@@ -1346,8 +1347,11 @@ const db = getFirestore(initializeApp({
         sEl = $('g-sub'),  fbEl= $('g-fb'),  lEl = $('g-list'),
         ldEl= $('g-loading'), chEl = $('g-chars'), bdEl = $('gb-badge');
   const col = collection(db, 'guestbook');
-  let lastId = null, lastT = 0;
   const CD = 45000;
+  const LT_KEY = 'gb_last_post_v1';
+  let lastId = null;
+  let lastT = 0;
+  try { lastT = parseInt(localStorage.getItem(LT_KEY) || '0', 10) || 0; } catch(_) {}
 
   /* stop event propagation on the form (from original code) */
   const fEl = $('g-form');
@@ -1419,7 +1423,7 @@ const db = getFirestore(initializeApp({
   };
 
   onSnapshot(
-    query(col, orderBy('ts', 'desc')),
+    query(col, orderBy('ts', 'desc'), limit(100)),
     sn  => render(sn.docs),
     err => { console.error(err); if (lEl) lEl.innerHTML = '<div class="g-empty">could not summon</div>'; }
   );
@@ -1438,6 +1442,7 @@ const db = getFirestore(initializeApp({
     try {
       const ref = await addDoc(col, { name, msg, vibe, ts: serverTimestamp() });
       lastId = ref.id; lastT = Date.now();
+      try { localStorage.setItem(LT_KEY, String(lastT)); } catch(_) {}
       nEl.value = ''; mEl.value = ''; if (vEl) vEl.value = '😎';
       uc();
       fb('your mark is left', 'ok');
@@ -1470,13 +1475,13 @@ const db = getFirestore(initializeApp({
     { src:'https://i.ibb.co/vCsmkH9t/Whats-App-Image-2026-02-28-at-13-33-31-3.jpg',  name:'Summer III', tag:'Summer' },
     { src:'https://i.ibb.co/pjHRnyjb/Whats-App-Image-2026-02-28-at-13-33-30-1.jpg',  name:'Spring I',   tag:'Spring' },
     { src:'https://i.ibb.co/r2S6zyF7/Whats-App-Image-2026-03-24-at-18-23-13-1.jpg',  name:'Spring IV',  tag:'Spring' },
-    { src:'https://i.postimg.cc/xcMN9b7b/Whats-App-Image-2026-03-24-at-182313.png',   name:'Summer IV',  tag:'Summer' },
-    { src:'https://i.ibb.co/rK5Ls18C/beautiful6.jpg',   name:'Summer IV',  tag:'Summer' },
-    { src:'https://i.ibb.co/1fFWr4v1/dreamforest4.jpg',   name:'Summer IV',  tag:'Summer' },
-    { src:'https://i.ibb.co/LzLPPZKf/empty5.jpg',   name:'Summer IV',  tag:'Summer' },
-    { src:'https://i.ibb.co/5XFS8y03/img3.jpg',   name:'Summer IV',  tag:'Summer' },
-    { src:'https://i.ibb.co/FkMQxL6Y/usky1.jpg',   name:'Summer IV',  tag:'Summer' },
-    { src:'https://i.ibb.co/ynRwrkTd/usky2.jpg',   name:'Summer IV',  tag:'Summer' },
+    { src:'https://i.postimg.cc/xcMN9b7b/Whats-App-Image-2026-03-24-at-182313.png',   name:'Summer IV',   tag:'Summer' },
+    { src:'https://i.ibb.co/rK5Ls18C/beautiful6.jpg',   name:'Summer V',    tag:'Summer' },
+    { src:'https://i.ibb.co/1fFWr4v1/dreamforest4.jpg',   name:'Summer VI',   tag:'Summer' },
+    { src:'https://i.ibb.co/LzLPPZKf/empty5.jpg',   name:'Summer VII',  tag:'Summer' },
+    { src:'https://i.ibb.co/5XFS8y03/img3.jpg',   name:'Summer VIII',  tag:'Summer' },
+    { src:'https://i.ibb.co/FkMQxL6Y/usky1.jpg',   name:'Summer IX',   tag:'Summer' },
+    { src:'https://i.ibb.co/ynRwrkTd/usky2.jpg',   name:'Summer X',    tag:'Summer' },
   ];
 
   const grid  = document.getElementById('gal-grid');
